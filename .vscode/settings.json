@@ -3,6 +3,8 @@
     "**/.gitignore": true,
     "**/.vscode": true,
     "**/node_modules": true,
+    "{src,test}/**/*.{js,d.ts,tsbuildinfo}": true,
+    "**/tsconfig*.json": true,
     "yarn.lock": true
   }
 }
