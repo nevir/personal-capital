@@ -1,0 +1,11 @@
+{
+  "name": "personal-capital",
+  "version": "0.1.0",
+  "description": "Node SDK that provides access to Personal Capital's private API",
+  "main": "./src",
+  "repository": "https://github.com/nevir/personal-capital",
+  "contributors": [
+    "Ian MacLeod <ian@nevir.net>"
+  ],
+  "license": "BlueOak-1.0.0"
+}
