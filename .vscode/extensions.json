@@ -1,5 +1,6 @@
 {
   "recommendations": [
-    "amodio.toggle-excluded-files"
+    "amodio.toggle-excluded-files",
+    "arcanis.vscode-zipfs"
   ]
 }
