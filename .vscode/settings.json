@@ -1,10 +1,12 @@
 {
   "files.exclude": {
-    "**/.gitignore": true,
-    "**/.vscode": true,
+    "**/.*": true,
     "**/node_modules": true,
-    "{src,test}/**/*.{js,d.ts,tsbuildinfo}": true,
     "**/tsconfig*.json": true,
+    "{src,test}/**/*.{js,d.ts,tsbuildinfo}": true,
     "yarn.lock": true
-  }
+  },
+  "files.insertFinalNewline": true,
+  "files.trimFinalNewlines": true,
+  "files.trimTrailingWhitespace": true
 }
