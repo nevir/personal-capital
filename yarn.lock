@@ -2,7 +2,7 @@
 # yarn lockfile v1
 
 
-typescript@^4.1.3:
-  version "4.1.3"
-  resolved "https://packages.convoy.com/artifactory/api/npm/npm/typescript/-/typescript-4.1.3.tgz#519d582bd94cba0cf8934c7d8e8467e473f53bb7"
-  integrity sha1-UZ1YK9lMugz4k0x9joRn5HP1O7c=
+typescript@^4.5.4:
+  version "4.5.4"
+  resolved "https://packages.convoy.com/artifactory/api/npm/npm/typescript/-/typescript-4.5.4.tgz#a17d3a0263bf5c8723b9c52f43c5084edf13c2e8"
+  integrity sha1-oX06AmO/XIcjucUvQ8UITt8Twug=
