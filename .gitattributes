@@ -3,6 +3,7 @@
 # See https://github.com/github/linguist/blob/master/docs/overrides.md
 
 # Yarn
+.pnp.js linguist-vendored
 .yarn/** linguist-vendored
 .yarn/releases/** binary
 .yarn/plugins/** binary
