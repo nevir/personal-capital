@@ -36,6 +36,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageLocation": "./",
           "packageDependencies": [
             ["@tsconfig/node16", "npm:1.0.2"],
+            ["@types/isomorphic-fetch", "npm:0.0.35"],
             ["@types/jest", "npm:27.0.3"],
             ["@types/node", "npm:16.11.13"],
             ["@types/web", "npm:0.0.48"],
@@ -1214,6 +1215,15 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageDependencies": [
             ["@types/graceful-fs", "npm:4.1.5"],
             ["@types/node", "npm:17.0.0"]
+          ],
+          "linkType": "HARD",
+        }]
+      ]],
+      ["@types/isomorphic-fetch", [
+        ["npm:0.0.35", {
+          "packageLocation": "./.yarn/cache/@types-isomorphic-fetch-npm-0.0.35-9dc60b5011-ae57d2605d.zip/node_modules/@types/isomorphic-fetch/",
+          "packageDependencies": [
+            ["@types/isomorphic-fetch", "npm:0.0.35"]
           ],
           "linkType": "HARD",
         }]
@@ -4026,6 +4036,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageDependencies": [
             ["personal-capital", "workspace:."],
             ["@tsconfig/node16", "npm:1.0.2"],
+            ["@types/isomorphic-fetch", "npm:0.0.35"],
             ["@types/jest", "npm:27.0.3"],
             ["@types/node", "npm:16.11.13"],
             ["@types/web", "npm:0.0.48"],

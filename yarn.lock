@@ -758,6 +758,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@types/isomorphic-fetch@npm:^0.0.35":
+  version: 0.0.35
+  resolution: "@types/isomorphic-fetch@npm:0.0.35"
+  checksum: ae57d2605d24f799fd3d838d59986e88e8a345c65c1751122f6b39b62de504e0a61cd62f04e6e157406c84cba60a6a39eb6d5d2c0a9e9ac153759d5354b5e7e9
+  languageName: node
+  linkType: hard
+
 "@types/istanbul-lib-coverage@npm:*, @types/istanbul-lib-coverage@npm:^2.0.0, @types/istanbul-lib-coverage@npm:^2.0.1":
   version: 2.0.3
   resolution: "@types/istanbul-lib-coverage@npm:2.0.3"
@@ -3177,6 +3184,7 @@ __metadata:
   resolution: "personal-capital@workspace:."
   dependencies:
     "@tsconfig/node16": ^1.0.2
+    "@types/isomorphic-fetch": ^0.0.35
     "@types/jest": ^27.0.3
     "@types/node": ^16.11.13
     "@types/web": ^0.0.48

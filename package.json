@@ -11,10 +11,11 @@
   "scripts": {
     "build": "tsc --build ./src",
     "clean": "rm -rf {src,test}{/**,}/*.{js,d.ts,tsbuildinfo}",
-    "test-functional": "jest test/functional"
+    "test-functional": "jest test/functional --runInBand"
   },
   "devDependencies": {
     "@tsconfig/node16": "^1.0.2",
+    "@types/isomorphic-fetch": "^0.0.35",
     "@types/jest": "^27.0.3",
     "@types/node": "^16.11.13",
     "@types/web": "^0.0.48",
