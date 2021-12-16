@@ -3,6 +3,7 @@
     "**/.*": true,
     "**/node_modules": true,
     "**/tsconfig*.json": true,
+    "**/*.config.*": true,
     "{src,test}/**/*.{js,d.ts,tsbuildinfo}": true,
     "yarn.lock": true
   },
