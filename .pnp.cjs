@@ -37,6 +37,8 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageDependencies": [
             ["@tsconfig/node16", "npm:1.0.2"],
             ["@types/node", "npm:16.11.13"],
+            ["@types/web", "npm:0.0.48"],
+            ["isomorphic-fetch", "npm:3.0.0"],
             ["ts-node", "virtual:c98ce58885144301218484485d1bce379dcb9bca00db8c788bf03744426854e81df27193a1ae94cb395da32081844e42eede6acc8853aa02a5b2717e2ce5aed8#npm:10.4.0"],
             ["typescript", "patch:typescript@npm%3A4.5.4#~builtin<compat/typescript>::version=4.5.4&hash=493e53"]
           ],
@@ -107,6 +109,15 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "linkType": "HARD",
         }]
       ]],
+      ["@types/web", [
+        ["npm:0.0.48", {
+          "packageLocation": "./.yarn/cache/@types-web-npm-0.0.48-297039dda4-992e5f5547.zip/node_modules/@types/web/",
+          "packageDependencies": [
+            ["@types/web", "npm:0.0.48"]
+          ],
+          "linkType": "HARD",
+        }]
+      ]],
       ["acorn", [
         ["npm:8.6.0", {
           "packageLocation": "./.yarn/cache/acorn-npm-8.6.0-9de50afc7d-9d0de73b73.zip/node_modules/acorn/",
@@ -152,11 +163,32 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "linkType": "HARD",
         }]
       ]],
+      ["isomorphic-fetch", [
+        ["npm:3.0.0", {
+          "packageLocation": "./.yarn/cache/isomorphic-fetch-npm-3.0.0-bce711adff-e5ab79a56c.zip/node_modules/isomorphic-fetch/",
+          "packageDependencies": [
+            ["isomorphic-fetch", "npm:3.0.0"],
+            ["node-fetch", "npm:2.6.6"],
+            ["whatwg-fetch", "npm:3.6.2"]
+          ],
+          "linkType": "HARD",
+        }]
+      ]],
       ["make-error", [
         ["npm:1.3.6", {
           "packageLocation": "./.yarn/cache/make-error-npm-1.3.6-ccb85d9458-b86e5e0e25.zip/node_modules/make-error/",
           "packageDependencies": [
             ["make-error", "npm:1.3.6"]
+          ],
+          "linkType": "HARD",
+        }]
+      ]],
+      ["node-fetch", [
+        ["npm:2.6.6", {
+          "packageLocation": "./.yarn/cache/node-fetch-npm-2.6.6-056db6b778-ee8290626b.zip/node_modules/node-fetch/",
+          "packageDependencies": [
+            ["node-fetch", "npm:2.6.6"],
+            ["whatwg-url", "npm:5.0.0"]
           ],
           "linkType": "HARD",
         }]
@@ -168,10 +200,21 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["personal-capital", "workspace:."],
             ["@tsconfig/node16", "npm:1.0.2"],
             ["@types/node", "npm:16.11.13"],
+            ["@types/web", "npm:0.0.48"],
+            ["isomorphic-fetch", "npm:3.0.0"],
             ["ts-node", "virtual:c98ce58885144301218484485d1bce379dcb9bca00db8c788bf03744426854e81df27193a1ae94cb395da32081844e42eede6acc8853aa02a5b2717e2ce5aed8#npm:10.4.0"],
             ["typescript", "patch:typescript@npm%3A4.5.4#~builtin<compat/typescript>::version=4.5.4&hash=493e53"]
           ],
           "linkType": "SOFT",
+        }]
+      ]],
+      ["tr46", [
+        ["npm:0.0.3", {
+          "packageLocation": "./.yarn/cache/tr46-npm-0.0.3-de53018915-726321c5ea.zip/node_modules/tr46/",
+          "packageDependencies": [
+            ["tr46", "npm:0.0.3"]
+          ],
+          "linkType": "HARD",
         }]
       ]],
       ["ts-node", [
@@ -223,6 +266,35 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageLocation": "./.yarn/cache/typescript-patch-0b90225f97-2e488dde7d.zip/node_modules/typescript/",
           "packageDependencies": [
             ["typescript", "patch:typescript@npm%3A4.5.4#~builtin<compat/typescript>::version=4.5.4&hash=493e53"]
+          ],
+          "linkType": "HARD",
+        }]
+      ]],
+      ["webidl-conversions", [
+        ["npm:3.0.1", {
+          "packageLocation": "./.yarn/cache/webidl-conversions-npm-3.0.1-60310f6a2b-c92a0a6ab9.zip/node_modules/webidl-conversions/",
+          "packageDependencies": [
+            ["webidl-conversions", "npm:3.0.1"]
+          ],
+          "linkType": "HARD",
+        }]
+      ]],
+      ["whatwg-fetch", [
+        ["npm:3.6.2", {
+          "packageLocation": "./.yarn/cache/whatwg-fetch-npm-3.6.2-4bdf324792-ee976b7249.zip/node_modules/whatwg-fetch/",
+          "packageDependencies": [
+            ["whatwg-fetch", "npm:3.6.2"]
+          ],
+          "linkType": "HARD",
+        }]
+      ]],
+      ["whatwg-url", [
+        ["npm:5.0.0", {
+          "packageLocation": "./.yarn/cache/whatwg-url-npm-5.0.0-374fb45e60-b8daed4ad3.zip/node_modules/whatwg-url/",
+          "packageDependencies": [
+            ["whatwg-url", "npm:5.0.0"],
+            ["tr46", "npm:0.0.3"],
+            ["webidl-conversions", "npm:3.0.1"]
           ],
           "linkType": "HARD",
         }]
