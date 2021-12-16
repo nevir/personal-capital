@@ -16,6 +16,8 @@ export interface Response<THeader extends BaseHeader, TData> {
 export interface BaseHeader {
   /** The session's current state in the authorization workflow. */
   authLevel: AuthenticationLevel
+  /** Any errors associated with the request. */
+  errors?: FieldError[]
   /** The Personal Capital API interface version. */
   SP_HEADER_VERSION: number
   /** The user's status. */
@@ -40,8 +42,6 @@ export interface BaseHeaderWithUser extends BaseHeader {
   developer: boolean
   /** The user-provided name for the current device. */
   deviceName: string
-  /** ??? */
-  errors?: unknown[]
   /** Whether the user is an account delegate of a primary user. */
   isDelegate: boolean
   /** ??? */
@@ -78,4 +78,16 @@ export interface UserRememberedHeader extends BaseHeaderWithUser {
   }
   /** CSRF token to use in the following request. */
   csrf: UUID
+}
+
+/**
+ * Error information about a specific field in a request.
+ */
+export interface FieldError<TField extends string = string> {
+  code: number
+  message: string
+  details: {
+    fieldName: TField
+    originalValue: any
+  }
 }

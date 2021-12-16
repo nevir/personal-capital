@@ -1,5 +1,6 @@
 import { VERSION } from '../version'
 import { Fetch, FetchRequestInit } from './dependencies/fetch'
+import { Operation, OperationName } from './schema'
 
 /**
  * Low level API client for Personal Capital.
@@ -11,6 +12,30 @@ export class APIClient {
   constructor(fetch: Fetch, options: Partial<APIClient.Options> = {}) {
     this._fetch = fetch
     this._options = { ...APIClient.DEFAULT_OPTIONS, ...options }
+  }
+
+  async call<TName extends OperationName>(
+    operation: TName,
+    request: Operation<TName>['Request']
+  ): Promise<Operation<TName>['Response']> {
+    const url = `${this._options.baseUrl}${operation}`
+    const params = Object.entries(request)
+      .map(([key, value]) => `${encodeURIComponent(key)}=${encodeURIComponent(`${value}`)}`)
+      .join('&')
+
+    const response = await this.fetch(url, {
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
+      },
+      method: 'POST',
+      body: params,
+    })
+    if (!response.ok) {
+      const message = `${response.status} ${response.statusText}\n${await response.text()}`
+      throw new Error(`Unable to fetch ${operation}: ${message}`)
+    }
+
+    return await response.json()
   }
 
   async getInitialCsrf() {

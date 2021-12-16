@@ -1,6 +1,7 @@
 /** The session's current state in the authorization workflow. */
 export type AuthenticationLevel =
   | 'DEVICE_AUTHORIZED'
+  | 'NONE'
   | 'SESSION_AUTHENTICATED'
   | 'USER_IDENTIFIED'
   | 'USER_REMEMBERED'
