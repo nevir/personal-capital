@@ -19,8 +19,10 @@
     "@types/jest": "^27.0.3",
     "@types/node": "^16.11.13",
     "@types/web": "^0.0.48",
+    "dialog-node": "^0.2.1",
     "isomorphic-fetch": "^3.0.0",
     "jest": "^27.4.5",
+    "jest-runner": "^27.4.5",
     "ts-jest": "^27.1.1",
     "ts-node": "^10.4.0",
     "typescript": "^4.5.4"
@@ -32,5 +34,10 @@
   "volta": {
     "node": "16.13.1",
     "yarn": "1.22.17"
+  },
+  "dependenciesMeta": {
+    "dialog-node@0.2.1": {
+      "unplugged": true
+    }
   }
 }

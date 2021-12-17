@@ -1,4 +1,5 @@
 import { VERSION } from '../version'
+import { APIError } from './APIError'
 import { Fetch, FetchRequestInit } from './dependencies/fetch'
 import { Operation, OperationName } from './schema'
 
@@ -35,7 +36,12 @@ export class APIClient {
       throw new Error(`Unable to fetch ${operation}: ${message}`)
     }
 
-    return await response.json()
+    const data = await response.json()
+    if (!data?.spHeader?.success) {
+      throw new APIError(operation, data)
+    }
+
+    return data
   }
 
   async getInitialCsrf() {

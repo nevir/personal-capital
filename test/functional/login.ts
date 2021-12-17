@@ -1,32 +1,77 @@
 import fetch from 'isomorphic-fetch'
 import { APIClient } from 'personal-capital'
+import * as dialog from 'dialog-node'
+import { UUID } from '../../src/api/schema/primitive'
 
-const { PC_EMAIL } = process.env
+let config: any
+try {
+  config = require('../../.config.local.json')
+} catch {
+  config = {}
+}
+
+// Ideally, we'd do this via jest.config.js, buuuut…
+// https://github.com/facebook/jest/issues/9759
+jest.setTimeout(2 ** 31 - 1)
 
 describe('login', () => {
+  let realUsername: string
+  let realPassword: string
 
-  it('was provided the required env vars', () => {
-    expect(PC_EMAIL).not.toBeUndefined()
+  async function configOrPrompt(key: string, message: string) {
+    if (config[key]) return config[key]
+
+    return await new Promise((resolve, reject) => {
+      dialog.entry(message, `Enter your Personal Capital account details`, 0, (code, value, error) => {
+        if (code !== 0) {
+          reject(`Unable to fetch ${key}: ${error} (code ${code})`)
+        } else {
+          resolve(value)
+        }
+      })
+    })
+  }
+
+  it('was provided the required configuration', async () => {
+    realUsername = await configOrPrompt('username', 'Email Address')
+    realPassword = await configOrPrompt('password', 'Password')
   })
 
-  it('supports the SMS flow', async () => {
+  describe('SMS Flow', () => {
     const client = new APIClient(fetch)
+    let csrf: UUID
 
-    const csrf = await client.getInitialCsrf()
-    console.log('got initial csrf:', csrf)
-
-    const response = await client.call('login/identifyUser', {
-      apiClient: 'WEB',
-      bindDevice: false,
-      csrf,
-      redirectTo: '',
-      referrerId: '',
-      skipFirstUse: '',
-      skipLinkAccount: false,
-      username: PC_EMAIL!,
+    it('retrieves the initial CSRF token', async () => {
+      csrf = await client.getInitialCsrf()
+      expect(csrf).toMatch(/^[0-9a-f\-]+$/)
     })
-    console.log('got response:', JSON.stringify(response, null, 2))
 
+    it('identifies the user', async () => {
+      const response = await client.call('login/identifyUser', {
+        apiClient: 'WEB',
+        bindDevice: false,
+        csrf,
+        redirectTo: '',
+        referrerId: '',
+        skipFirstUse: '',
+        skipLinkAccount: false,
+        username: realUsername,
+      })
+
+      csrf = response.spHeader.csrf || csrf
+    })
+
+    it('requests a SMS code', async () => {
+      const response = await client.call('credential/challengeSms', {
+        apiClient: 'WEB',
+        bindDevice: false,
+        challengeMethod: 'OP',
+        challengeReason: 'DEVICE_AUTH',
+        csrf,
+      })
+
+      csrf = response.spHeader.csrf || csrf
+    })
   })
 
 })

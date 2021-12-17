@@ -5,7 +5,7 @@ import { Email, GUID, UUID } from './primitive'
 /**
  * A response (JSON) payload from the Personal Capital API.
  */
-export interface Response<THeader extends BaseHeader, TData> {
+export interface Response<THeader extends BaseHeader = BaseHeader, TData = unknown> {
   spHeader: THeader
   spData: TData
 }
@@ -16,6 +16,8 @@ export interface Response<THeader extends BaseHeader, TData> {
 export interface BaseHeader {
   /** The session's current state in the authorization workflow. */
   authLevel: AuthenticationLevel
+  /** CSRF token to use in the following request. */
+  csrf?: UUID
   /** Any errors associated with the request. */
   errors?: FieldError[]
   /** The Personal Capital API interface version. */
@@ -57,9 +59,6 @@ export interface BaseHeaderWithUser extends BaseHeader {
  */
 export interface UserIdentifiedHeader extends BaseHeader {
   authLevel: 'USER_IDENTIFIED'
-
-  /** CSRF token to use in the following request. */
-  csrf: UUID
 }
 
 /**
@@ -76,8 +75,6 @@ export interface UserRememberedHeader extends BaseHeaderWithUser {
     hasInvestment: boolean
     hasOnUs: boolean
   }
-  /** CSRF token to use in the following request. */
-  csrf: UUID
 }
 
 /**
