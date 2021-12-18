@@ -5,6 +5,7 @@
     "**/tsconfig*.json": true,
     "**/*.config.*": true,
     "{src,test}/**/*.{js,d.ts,tsbuildinfo}": true,
+    "coverage/": true,
     "yarn.lock": true
   },
   "files.insertFinalNewline": true,
