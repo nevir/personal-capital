@@ -39,11 +39,13 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@types/isomorphic-fetch", "npm:0.0.35"],
             ["@types/jest", "npm:27.0.3"],
             ["@types/node", "npm:16.11.13"],
+            ["@types/tough-cookie", "npm:4.0.1"],
             ["@types/web", "npm:0.0.48"],
             ["dialog-node", "npm:0.2.1"],
             ["isomorphic-fetch", "npm:3.0.0"],
             ["jest", "virtual:c98ce58885144301218484485d1bce379dcb9bca00db8c788bf03744426854e81df27193a1ae94cb395da32081844e42eede6acc8853aa02a5b2717e2ce5aed8#npm:27.4.5"],
             ["jest-runner", "npm:27.4.5"],
+            ["tough-cookie", "npm:4.0.0"],
             ["ts-jest", "virtual:c98ce58885144301218484485d1bce379dcb9bca00db8c788bf03744426854e81df27193a1ae94cb395da32081844e42eede6acc8853aa02a5b2717e2ce5aed8#npm:27.1.1"],
             ["ts-node", "virtual:c98ce58885144301218484485d1bce379dcb9bca00db8c788bf03744426854e81df27193a1ae94cb395da32081844e42eede6acc8853aa02a5b2717e2ce5aed8#npm:10.4.0"],
             ["typescript", "patch:typescript@npm%3A4.5.4#~builtin<compat/typescript>::version=4.5.4&hash=493e53"]
@@ -1300,6 +1302,15 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageLocation": "./.yarn/cache/@types-stack-utils-npm-2.0.1-867718ab70-205fdbe332.zip/node_modules/@types/stack-utils/",
           "packageDependencies": [
             ["@types/stack-utils", "npm:2.0.1"]
+          ],
+          "linkType": "HARD",
+        }]
+      ]],
+      ["@types/tough-cookie", [
+        ["npm:4.0.1", {
+          "packageLocation": "./.yarn/cache/@types-tough-cookie-npm-4.0.1-3e523463ac-7570c1c2d7.zip/node_modules/@types/tough-cookie/",
+          "packageDependencies": [
+            ["@types/tough-cookie", "npm:4.0.1"]
           ],
           "linkType": "HARD",
         }]
@@ -4050,11 +4061,13 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@types/isomorphic-fetch", "npm:0.0.35"],
             ["@types/jest", "npm:27.0.3"],
             ["@types/node", "npm:16.11.13"],
+            ["@types/tough-cookie", "npm:4.0.1"],
             ["@types/web", "npm:0.0.48"],
             ["dialog-node", "npm:0.2.1"],
             ["isomorphic-fetch", "npm:3.0.0"],
             ["jest", "virtual:c98ce58885144301218484485d1bce379dcb9bca00db8c788bf03744426854e81df27193a1ae94cb395da32081844e42eede6acc8853aa02a5b2717e2ce5aed8#npm:27.4.5"],
             ["jest-runner", "npm:27.4.5"],
+            ["tough-cookie", "npm:4.0.0"],
             ["ts-jest", "virtual:c98ce58885144301218484485d1bce379dcb9bca00db8c788bf03744426854e81df27193a1ae94cb395da32081844e42eede6acc8853aa02a5b2717e2ce5aed8#npm:27.1.1"],
             ["ts-node", "virtual:c98ce58885144301218484485d1bce379dcb9bca00db8c788bf03744426854e81df27193a1ae94cb395da32081844e42eede6acc8853aa02a5b2717e2ce5aed8#npm:10.4.0"],
             ["typescript", "patch:typescript@npm%3A4.5.4#~builtin<compat/typescript>::version=4.5.4&hash=493e53"]

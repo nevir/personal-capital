@@ -64,8 +64,8 @@ export interface UserIdentifiedHeader extends BaseHeader {
 /**
 * Session-level metadata returned for an identified & remembered user.
 */
-export interface UserRememberedHeader extends BaseHeaderWithUser {
-  authLevel: 'USER_REMEMBERED'
+export interface AuthorizedHeader extends BaseHeaderWithUser {
+  authLevel: 'USER_REMEMBERED' | 'DEVICE_AUTHORIZED'
 
   /** Legacy(?) flags for specific functionality. */
   accountsSummary: {

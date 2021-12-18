@@ -1,6 +1,6 @@
 import { UserCredential, UserStatus } from '../authorization'
 import { Email, UUID } from '../primitive'
-import { Response, UserIdentifiedHeader, UserRememberedHeader } from '../Response'
+import { Response, UserIdentifiedHeader, AuthorizedHeader } from '../Response'
 
 export interface IdentifyUser {
   path: 'login/identifyUser'
@@ -16,7 +16,7 @@ export interface IdentifyUser {
     username: Email
   }
 
-  Response: Response<UserIdentifiedHeader | UserRememberedHeader, {
+  Response: Response<UserIdentifiedHeader | AuthorizedHeader, {
     userStatus: UserStatus
     credentials: UserCredential[]
     allCredentials: { name: UserCredential, status: 'ACTIVE' }

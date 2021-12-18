@@ -1,6 +1,9 @@
+import * as dialog from 'dialog-node'
 import fetch from 'isomorphic-fetch'
 import { APIClient } from 'personal-capital'
-import * as dialog from 'dialog-node'
+import { CookieJar, } from 'tough-cookie'
+import * as util from 'util'
+
 import { UUID } from '../../src/api/schema/primitive'
 
 let config: any
@@ -18,18 +21,21 @@ describe('login', () => {
   let realUsername: string
   let realPassword: string
 
-  async function configOrPrompt(key: string, message: string) {
-    if (config[key]) return config[key]
-
-    return await new Promise((resolve, reject) => {
-      dialog.entry(message, `Enter your Personal Capital account details`, 0, (code, value, error) => {
+  async function prompt(message: string, title = message): Promise<string> {
+    return new Promise((resolve, reject) => {
+      dialog.entry(message, title, 0, (code, value, error) => {
         if (code !== 0) {
-          reject(`Unable to fetch ${key}: ${error} (code ${code})`)
+          reject(new Error(`Prompt failure: ${error} (code ${code})`))
         } else {
           resolve(value)
         }
       })
     })
+  }
+
+  async function configOrPrompt(key: string, message: string) {
+    if (config[key]) return config[key]
+    return await prompt(message, `Enter your Personal Capital account details`)
   }
 
   it('was provided the required configuration', async () => {
@@ -38,7 +44,7 @@ describe('login', () => {
   })
 
   describe('SMS Flow', () => {
-    const client = new APIClient(fetch)
+    const client = new APIClient(fetch, new CookieJar())
     let csrf: UUID
 
     it('retrieves the initial CSRF token', async () => {
@@ -57,7 +63,6 @@ describe('login', () => {
         skipLinkAccount: false,
         username: realUsername,
       })
-
       csrf = response.spHeader.csrf || csrf
     })
 
@@ -69,7 +74,35 @@ describe('login', () => {
         challengeReason: 'DEVICE_AUTH',
         csrf,
       })
+      csrf = response.spHeader.csrf || csrf
+    })
 
+    it('authenticates via the received SMS code', async () => {
+      const response = await client.call('credential/authenticateSms', {
+        apiClient: 'WEB',
+        bindDevice: false,
+        challengeMethod: 'OP',
+        challengeReason: 'DEVICE_AUTH',
+        code: await prompt('SMS Code'),
+        csrf,
+      })
+      csrf = response.spHeader.csrf || csrf
+    })
+
+    it('logs in via password', async () => {
+      const response = await client.call('credential/authenticatePassword', {
+        apiClient: 'WEB',
+        bindDevice: false,
+        csrf,
+        deviceName: 'Functional Test Suite',
+        passwd: realPassword,
+        redirectTo: '',
+        referrerId: '',
+        skipFirstUse: '',
+        skipLinkAccount: false,
+        username: realUsername,
+      })
+      console.log(JSON.stringify(response, null, 2))
       csrf = response.spHeader.csrf || csrf
     })
   })

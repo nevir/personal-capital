@@ -1,6 +1,6 @@
 import { UserCredential } from '../authorization'
 import { Email, UUID } from '../primitive'
-import { Response, UserRememberedHeader } from '../Response'
+import { Response, AuthorizedHeader } from '../Response'
 
 export interface AuthenticatePassword {
   path: 'credential/authenticatePassword'
@@ -18,7 +18,7 @@ export interface AuthenticatePassword {
     username: Email
   }
 
-  Response: Response<UserRememberedHeader, {
+  Response: Response<AuthorizedHeader, {
     credentials: UserCredential[]
     allCredentials: { name: UserCredential, status: 'ACTIVE' }
   }>

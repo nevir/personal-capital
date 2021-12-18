@@ -828,6 +828,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@types/tough-cookie@npm:^4":
+  version: 4.0.1
+  resolution: "@types/tough-cookie@npm:4.0.1"
+  checksum: 7570c1c2d74201f4ead3512cf8e4c99e97d92ab8a02ae2fb987fd720ced0ca1a2baf250c98a861a170b86762606c9bf6d32207675f13dffc5ab75c08c96578d2
+  languageName: node
+  linkType: hard
+
 "@types/web@npm:^0.0.48":
   version: 0.0.48
   resolution: "@types/web@npm:0.0.48"
@@ -3196,11 +3203,13 @@ __metadata:
     "@types/isomorphic-fetch": ^0.0.35
     "@types/jest": ^27.0.3
     "@types/node": ^16.11.13
+    "@types/tough-cookie": ^4
     "@types/web": ^0.0.48
     dialog-node: ^0.2.1
     isomorphic-fetch: ^3.0.0
     jest: ^27.4.5
     jest-runner: ^27.4.5
+    tough-cookie: ^4.0.0
     ts-jest: ^27.1.1
     ts-node: ^10.4.0
     typescript: ^4.5.4

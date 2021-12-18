@@ -1,5 +1,6 @@
 import { VERSION } from '../version'
 import { APIError } from './APIError'
+import { CookieJar } from './dependencies/cookieJar'
 import { Fetch, FetchRequestInit } from './dependencies/fetch'
 import { Operation, OperationName } from './schema'
 
@@ -8,10 +9,12 @@ import { Operation, OperationName } from './schema'
  */
 export class APIClient {
   private _fetch: Fetch
+  private _cookieJar: CookieJar
   private _options: APIClient.Options
 
-  constructor(fetch: Fetch, options: Partial<APIClient.Options> = {}) {
+  constructor(fetch: Fetch, cookieJar: CookieJar, options: Partial<APIClient.Options> = {}) {
     this._fetch = fetch
+    this._cookieJar = cookieJar
     this._options = { ...APIClient.DEFAULT_OPTIONS, ...options }
   }
 
@@ -47,7 +50,7 @@ export class APIClient {
   async getInitialCsrf() {
     const { initialCsrfUrl: url, initialCsrfPattern: pattern } = this._options
 
-    const response = await this._fetch(url)
+    const response = await this.fetch(url)
     const body = await response.text()
     if (!response.ok) {
       const message = `${response.status} ${response.statusText}\n${body}`
@@ -63,13 +66,23 @@ export class APIClient {
   }
 
   async fetch(resource: string, init?: FetchRequestInit) {
-    return this._fetch(resource, {
+    const response = await this._fetch(resource, {
       ...init,
       headers: {
         'User-Agent': this._options.userAgent,
+        'Cookie': await this._cookieJar.getCookieString(resource),
         ...init?.headers,
       }
     })
+
+    const setCookie = response.headers.get('Set-Cookie')
+    if (setCookie) {
+      for (const cookie of setCookie.split(/,\s*(?=[a-z0-9_\-]+=)/i)) {
+        await this._cookieJar.setCookie(cookie, resource)
+      }
+    }
+
+    return response
   }
 }
 
