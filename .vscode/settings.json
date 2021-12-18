@@ -22,5 +22,10 @@
   "typescript.format.semicolons": "remove",
   "javascript.format.semicolons": "remove",
   "editor.formatOnSave": true,
-  "editor.defaultFormatter": "vscode.typescript-language-features"
+  "editor.defaultFormatter": "vscode.typescript-language-features",
+  "jest.jestCommandLine": "yarn jest",
+  "jest.autoRun": {
+    "watch": false,
+    "onSave": "test-file"
+ }
 }
