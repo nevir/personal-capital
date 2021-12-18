@@ -112,7 +112,6 @@ describe('login', () => {
         csrf,
         lastServerChangeId: -1,
       })
-      console.log(JSON.stringify(response, null, 2))
       csrf = response.spHeader.csrf || csrf
     })
   })
