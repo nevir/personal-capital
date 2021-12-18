@@ -16,6 +16,9 @@ test/**/*.js
 test/**/*.d.ts
 *.tsbuildinfo
 
+# Jest
+coverage/
+
 # Temporary
 docs/api/examples/
 
