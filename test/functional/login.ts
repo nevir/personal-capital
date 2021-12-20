@@ -2,9 +2,6 @@ import * as dialog from 'dialog-node'
 import fetch from 'isomorphic-fetch'
 import { APIClient } from 'personal-capital'
 import { CookieJar, } from 'tough-cookie'
-import * as util from 'util'
-
-import { UUID } from '../../src/api/schema/primitive'
 
 let config: any
 try {

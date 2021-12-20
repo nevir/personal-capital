@@ -1,4 +1,4 @@
-import { AuthorizedHeader, Response } from '../format'
+import { AuthorizedHeader, Response } from '../../format'
 
 export interface QuerySession {
   path: 'login/querySession'

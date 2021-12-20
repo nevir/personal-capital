@@ -1,4 +1,4 @@
-import { Response, UserIdentifiedHeader } from '../format'
+import { Response, UserIdentifiedHeader } from '../../format'
 
 export interface ChallengeSms {
   path: 'credential/challengeSms'

@@ -1,4 +1,4 @@
-import { Response, AuthorizedHeader } from '../format'
+import { Response, AuthorizedHeader } from '../../format'
 
 export interface SuggestDeviceName {
   path: 'credential/suggestDeviceName'
