@@ -1,6 +1,6 @@
-import { UserCredential, UserStatus } from '../authorization'
+import { UserCredential, UserStatus } from '../enums'
 import { Email, UUID } from '../primitive'
-import { Response, UserIdentifiedHeader, AuthorizedHeader } from '../Response'
+import { Response, UserIdentifiedHeader, AuthorizedHeader } from '../format'
 
 export interface IdentifyUser {
   path: 'login/identifyUser'

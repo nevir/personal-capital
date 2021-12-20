@@ -1,6 +1,6 @@
-import { UserCredential } from '../authorization'
+import { UserCredential } from '../enums'
 import { Email, UUID } from '../primitive'
-import { Response, AuthorizedHeader } from '../Response'
+import { Response, AuthorizedHeader } from '../format'
 
 export interface AuthenticatePassword {
   path: 'credential/authenticatePassword'

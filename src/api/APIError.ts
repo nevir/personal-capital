@@ -1,4 +1,4 @@
-import { FieldError, Response } from './schema/Response'
+import { FieldError, Response } from './schema/format'
 
 export class APIError extends Error {
   errors: FieldError[]

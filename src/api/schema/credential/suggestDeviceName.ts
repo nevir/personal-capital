@@ -1,5 +1,5 @@
 import { UUID } from '../primitive'
-import { Response, AuthorizedHeader } from '../Response'
+import { Response, AuthorizedHeader } from '../format'
 
 export interface SuggestDeviceName {
   path: 'credential/suggestDeviceName'

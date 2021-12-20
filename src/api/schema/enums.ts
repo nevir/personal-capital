@@ -1,3 +1,7 @@
+/** The kind of client making requests. */
+export type Client =
+  | 'WEB'
+
 /** The session's current state in the authorization workflow. */
 export type AuthenticationLevel =
   | 'DEVICE_AUTHORIZED'
@@ -20,3 +24,10 @@ export type UserCredential =
   | 'SITE_KNOWLEDGE'
   | 'PASSWORD'
   | 'PASSWORD_RESET'
+
+/** Flags indicating which specific functionality is enabled. */
+export type AccountMetaData =
+  | 'HAS_CASH'
+  | 'HAS_CREDIT'
+  | 'HAS_INVESTMENT'
+  | 'HAS_ON_US'

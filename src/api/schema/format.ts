@@ -1,6 +1,15 @@
-import { AccountMetaData } from './account'
-import { AuthenticationLevel, UserStatus } from './authorization'
+import { AccountMetaData, AuthenticationLevel, Client, UserStatus } from './enums'
 import { Email, GUID, UUID } from './primitive'
+
+/**
+ * Properties common to all Personal Capital Requests
+ */
+export interface BaseRequest {
+  /** The kind of making the request. */
+  apiClient: Client
+  /** The most recent CSRF token associated with this session. */
+  csrf: UUID
+}
 
 /**
  * A response (JSON) payload from the Personal Capital API.

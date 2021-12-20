@@ -1,5 +1,5 @@
 import { UUID } from '../primitive'
-import { Response, UserIdentifiedHeader } from '../Response'
+import { Response, UserIdentifiedHeader } from '../format'
 
 export interface ChallengeSms {
   path: 'credential/challengeSms'
