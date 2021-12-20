@@ -1,5 +1,5 @@
 /** The kind of client making requests. */
-export type Client =
+export type ClientType =
   | 'WEB'
 
 /** The session's current state in the authorization workflow. */
@@ -31,3 +31,7 @@ export type AccountMetaData =
   | 'HAS_CREDIT'
   | 'HAS_INVESTMENT'
   | 'HAS_ON_US'
+
+/** A kind of server data change */
+export type ServerDataChangeType =
+  'PERSON_UPDATED'

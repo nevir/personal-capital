@@ -1,4 +1,4 @@
-import { AccountMetaData, AuthenticationLevel, Client, UserStatus } from './enums'
+import { AccountMetaData, AuthenticationLevel, ClientType, ServerDataChangeType, UserStatus } from './enums'
 import { Email, GUID, UUID } from './primitive'
 
 /**
@@ -6,9 +6,11 @@ import { Email, GUID, UUID } from './primitive'
  */
 export interface BaseRequest {
   /** The kind of making the request. */
-  apiClient: Client
+  apiClient: ClientType
   /** The most recent CSRF token associated with this session. */
   csrf: UUID
+  /** The most recent server change id associated with this session. */
+  lastServerChangeId: number
 }
 
 /**
@@ -31,6 +33,8 @@ export interface BaseHeader {
   errors?: FieldError[]
   /** The Personal Capital API interface version. */
   SP_HEADER_VERSION: number
+  /** Any data changes that occurred after lastServerChangeId. */
+  SP_DATA_CHANGES?: ServerDataChange[]
   /** The user's status. */
   status: UserStatus
   /** ??? */
@@ -84,6 +88,15 @@ export interface AuthorizedHeader extends BaseHeaderWithUser {
     hasInvestment: boolean
     hasOnUs: boolean
   }
+}
+
+/**
+ * A server data change.
+ */
+export interface ServerDataChange {
+  serverChangeId: number
+  details: any
+  eventType: ServerDataChangeType
 }
 
 /**

@@ -1,14 +1,9 @@
-import { UUID } from '../primitive'
 import { AuthorizedHeader, Response } from '../format'
 
 export interface QuerySession {
   path: 'login/querySession'
 
-  Request: {
-    apiClient: 'WEB'
-    csrf: UUID
-    lastServerChangeId: number
-  }
+  Request: {}
 
   Response: Response<AuthorizedHeader, void>
 }

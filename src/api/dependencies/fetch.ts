@@ -25,6 +25,10 @@ export interface FetchResponse {
   text(): Promise<string>
 }
 
+export interface OkFetchResponse extends FetchResponse {
+  readonly ok: true
+}
+
 interface Headers {
   [Symbol.iterator](): IterableIterator<[string, string]>
   entries(): IterableIterator<[string, string]>

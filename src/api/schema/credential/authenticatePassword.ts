@@ -1,14 +1,12 @@
 import { UserCredential } from '../enums'
-import { Email, UUID } from '../primitive'
+import { Email } from '../primitive'
 import { Response, AuthorizedHeader } from '../format'
 
 export interface AuthenticatePassword {
   path: 'credential/authenticatePassword'
 
   Request: {
-    apiClient: 'WEB'
     bindDevice: boolean
-    csrf: UUID
     deviceName: string
     passwd: string
     redirectTo: string | undefined

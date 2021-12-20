@@ -1,8 +1,11 @@
 import { VERSION } from '../version'
 import { APIError } from './APIError'
 import { CookieJar } from './dependencies/cookieJar'
-import { Fetch, FetchRequestInit } from './dependencies/fetch'
+import { Fetch, FetchRequestInit, OkFetchResponse } from './dependencies/fetch'
 import { Operation, OperationName } from './schema'
+import { ClientType } from './schema/enums'
+import { BaseRequest } from './schema/format'
+import { UUID } from './schema/primitive'
 
 /**
  * Low level API client for Personal Capital.
@@ -11,6 +14,8 @@ export class APIClient {
   private _fetch: Fetch
   private _cookieJar: CookieJar
   private _options: APIClient.Options
+  private _lastCsrf?: UUID
+  private _lastServerChangeId = -1
 
   constructor(fetch: Fetch, cookieJar: CookieJar, options: Partial<APIClient.Options> = {}) {
     this._fetch = fetch
@@ -23,7 +28,13 @@ export class APIClient {
     request: Operation<TName>['Request']
   ): Promise<Operation<TName>['Response']> {
     const url = `${this._options.baseUrl}${operation}`
-    const params = Object.entries(request)
+    const commonFields: BaseRequest = {
+      apiClient: this._options.clientType,
+      csrf: await this.getCurrentCsrf(),
+      lastServerChangeId: this._lastServerChangeId,
+    }
+
+    const params = Object.entries({ ...request, ...commonFields })
       .map(([key, value]) => `${encodeURIComponent(key)}=${encodeURIComponent(`${value}`)}`)
       .join('&')
 
@@ -34,12 +45,19 @@ export class APIClient {
       method: 'POST',
       body: params,
     })
-    if (!response.ok) {
-      const message = `${response.status} ${response.statusText}\n${await response.text()}`
-      throw new Error(`Unable to fetch ${operation}: ${message}`)
+
+    const data = await response.json() as Operation<TName>['Response']
+
+    if (data?.spHeader?.csrf) {
+      this._lastCsrf = data.spHeader.csrf
     }
 
-    const data = await response.json()
+    for (const { serverChangeId } of data?.spHeader?.SP_DATA_CHANGES || []) {
+      if (serverChangeId > this._lastServerChangeId) {
+        this._lastServerChangeId = serverChangeId
+      }
+    }
+
     if (!data?.spHeader?.success) {
       throw new APIError(operation, data)
     }
@@ -47,7 +65,15 @@ export class APIClient {
     return data
   }
 
-  async getInitialCsrf() {
+  private async getCurrentCsrf() {
+    if (!this._lastCsrf) {
+      this._lastCsrf = await this.getInitialCsrf()
+    }
+
+    return this._lastCsrf
+  }
+
+  private async getInitialCsrf() {
     const { initialCsrfUrl: url, initialCsrfPattern: pattern } = this._options
 
     const response = await this.fetch(url)
@@ -65,7 +91,7 @@ export class APIClient {
     return token
   }
 
-  async fetch(resource: string, init?: FetchRequestInit) {
+  private async fetch(resource: string, init?: FetchRequestInit) {
     const response = await this._fetch(resource, {
       ...init,
       headers: {
@@ -82,7 +108,12 @@ export class APIClient {
       }
     }
 
-    return response
+    if (!response.ok) {
+      const message = `${response.status} ${response.statusText}\n${await response.text()}`
+      throw new Error(`Unable to fetch ${resource}: ${message}`)
+    }
+
+    return response as OkFetchResponse
   }
 }
 
@@ -92,6 +123,7 @@ export namespace APIClient {
     initialCsrfUrl: string
     initialCsrfPattern: RegExp
     userAgent: string
+    clientType: ClientType
   }
 
   export const DEFAULT_OPTIONS: Options = {
@@ -99,5 +131,6 @@ export namespace APIClient {
     initialCsrfUrl: 'https://home.personalcapital.com/page/login/goHome',
     initialCsrfPattern: /window\.csrf ='([^']+)'/,
     userAgent: `personal-capital/${VERSION} (https://github.com/nevir/personal-capital)`,
+    clientType: 'WEB'
   }
 }
