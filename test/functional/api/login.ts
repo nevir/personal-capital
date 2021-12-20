@@ -1,39 +1,15 @@
-import * as dialog from 'dialog-node'
 import fetch from 'isomorphic-fetch'
 import { APIClient } from 'personal-capital'
 import { CookieJar, } from 'tough-cookie'
-
-let config: any
-try {
-  config = require('../../.config.local.json')
-} catch {
-  config = {}
-}
+import { configOrPrompt, prompt } from '../../support/functional/dialog'
 
 // Ideally, we'd do this via jest.config.js, buuuut…
 // https://github.com/facebook/jest/issues/9759
 jest.setTimeout(2 ** 31 - 1)
 
-describe('login', () => {
+describe('APIClient Login Flows', () => {
   let realUsername: string
   let realPassword: string
-
-  async function prompt(message: string, title = message): Promise<string> {
-    return new Promise((resolve, reject) => {
-      dialog.entry(message, title, 0, (code, value, error) => {
-        if (code !== 0) {
-          reject(new Error(`Prompt failure: ${error} (code ${code})`))
-        } else {
-          resolve(value)
-        }
-      })
-    })
-  }
-
-  async function configOrPrompt(key: string, message: string) {
-    if (config[key]) return config[key]
-    return await prompt(message, `Enter your Personal Capital account details`)
-  }
 
   it('was provided the required configuration', async () => {
     realUsername = await configOrPrompt('username', 'Email Address')
