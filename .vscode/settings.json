@@ -29,5 +29,7 @@
     "watch": false,
     "onSave": "test-file"
 },
-"jest.showCoverageOnLoad": true
+"jest.showCoverageOnLoad": true,
+"typescript.suggest.completeJSDocs": false,
+"typescript.suggest.jsdoc.generateReturns": false
 }
