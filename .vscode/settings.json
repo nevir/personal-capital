@@ -25,11 +25,11 @@
   "editor.formatOnSave": true,
   "editor.defaultFormatter": "vscode.typescript-language-features",
   "jest.jestCommandLine": "yarn jest",
+  "jest.showCoverageOnLoad": true,
+  "typescript.suggest.completeJSDocs": false,
+  "typescript.suggest.jsdoc.generateReturns": false,
   "jest.autoRun": {
-    "watch": false,
-    "onSave": "test-file"
-},
-"jest.showCoverageOnLoad": true,
-"typescript.suggest.completeJSDocs": false,
-"typescript.suggest.jsdoc.generateReturns": false
+    "watch": true,
+    "onStartup": ["all-tests"]
+  }
 }
