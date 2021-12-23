@@ -17,7 +17,7 @@ describe('APIClient Login Flows', () => {
   })
 
   describe('SMS Flow', () => {
-    const client = new APIClient(fetch, new CookieJar())
+    const client = new APIClient(new CookieJar(), fetch)
     let deviceName: string
 
     it('identifies the user', async () => {

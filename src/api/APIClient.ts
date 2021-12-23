@@ -11,15 +11,15 @@ import { UUID } from './schema/primitive'
  * Low level API client for Personal Capital.
  */
 export class APIClient {
-  private _fetch: Fetch
   private _cookieJar: CookieJar
+  private _fetch: Fetch
   private _options: APIClient.Options
   private _lastCsrf?: UUID
   private _lastServerChangeId = -1
 
-  constructor(fetch: Fetch, cookieJar: CookieJar, options: Partial<APIClient.Options> = {}) {
-    this._fetch = fetch
+  constructor(cookieJar: CookieJar, fetch: Fetch, options: Partial<APIClient.Options> = {}) {
     this._cookieJar = cookieJar
+    this._fetch = fetch
     this._options = { ...APIClient.DEFAULT_OPTIONS, ...options }
   }
 
