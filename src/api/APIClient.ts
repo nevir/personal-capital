@@ -17,7 +17,14 @@ export class APIClient {
   private _lastCsrf?: UUID
   private _lastServerChangeId = -1
 
-  constructor(cookieJar: CookieJar, fetch: Fetch, options: Partial<APIClient.Options> = {}) {
+  constructor(cookieJar: CookieJar, fetch?: Fetch, options: Partial<APIClient.Options> = {}) {
+    if (!fetch) {
+      if (!(typeof global.fetch === 'function')) {
+        throw new Error(`Please provide an implementation of the fetch API`)
+      }
+      fetch = global.fetch
+    }
+
     this._cookieJar = cookieJar
     this._fetch = fetch
     this._options = { ...APIClient.DEFAULT_OPTIONS, ...options }
