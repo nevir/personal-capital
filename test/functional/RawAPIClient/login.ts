@@ -8,7 +8,7 @@ import { configOrPrompt, prompt } from '../../support/functional/dialog'
 jest.setTimeout(2 ** 31 - 1)
 
 
-describe('APIClient Login Flows', () => {
+describe('RawAPIClient Login Flows', () => {
   // Skip in VS Code
   if (process.env.VSCODE_PID) {
     it('is skipped when running within VS Code', () => { })
