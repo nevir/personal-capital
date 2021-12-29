@@ -24,10 +24,11 @@
   "javascript.format.semicolons": "remove",
   "editor.formatOnSave": true,
   "editor.defaultFormatter": "vscode.typescript-language-features",
-  "jest.jestCommandLine": "yarn jest",
-  "jest.showCoverageOnLoad": true,
   "typescript.suggest.completeJSDocs": false,
   "typescript.suggest.jsdoc.generateReturns": false,
+
+  "jest.jestCommandLine": "yarn jest",
+  "jest.showCoverageOnLoad": true,
   "jest.autoRun": {
     "watch": true,
     "onStartup": ["all-tests"]

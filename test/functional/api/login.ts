@@ -16,8 +16,6 @@ describe('APIClient Login Flows', () => {
     let realUsername: string
     let realPassword: string
 
-    console.log(process.env)
-
     it('was provided the required configuration', async () => {
       realUsername = await configOrPrompt('username', 'Email Address')
       realPassword = await configOrPrompt('password', 'Password')
