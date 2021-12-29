@@ -2756,6 +2756,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"jssha@npm:~3.2.0":
+  version: 3.2.0
+  resolution: "jssha@npm:3.2.0"
+  checksum: 2adb8a9a57a79360379e843c0548e240d072c2ef12aef39ef6a784315686bd6f65501e9353fdd2f3a604f64af07e7eab04a0ed92b221cdfea97d671d7b8e14f4
+  languageName: node
+  linkType: hard
+
 "kleur@npm:^3.0.3":
   version: 3.0.3
   resolution: "kleur@npm:3.0.3"
@@ -3152,6 +3159,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"otpauth@npm:^7.0.8":
+  version: 7.0.8
+  resolution: "otpauth@npm:7.0.8"
+  dependencies:
+    jssha: ~3.2.0
+  checksum: 7bd3fa4fc216ce7669cb80c43570bdfaf8977877f9add839d6fb199c6b727bf8f8224032908952a58097a0e4bec40626ba83b83b7b6acf383ca5b92e58b8f71a
+  languageName: node
+  linkType: hard
+
 "p-limit@npm:^2.2.0":
   version: 2.3.0
   resolution: "p-limit@npm:2.3.0"
@@ -3236,6 +3252,7 @@ __metadata:
     jest: ^27.4.5
     jest-fetch-mock: ^3.0.3
     jest-runner: ^27.4.5
+    otpauth: ^7.0.8
     tough-cookie: ^4.0.0
     ts-jest: ^27.1.1
     ts-node: ^10.4.0

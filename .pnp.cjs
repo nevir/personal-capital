@@ -46,6 +46,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["jest", "virtual:c98ce58885144301218484485d1bce379dcb9bca00db8c788bf03744426854e81df27193a1ae94cb395da32081844e42eede6acc8853aa02a5b2717e2ce5aed8#npm:27.4.5"],
             ["jest-fetch-mock", "npm:3.0.3"],
             ["jest-runner", "npm:27.4.5"],
+            ["otpauth", "npm:7.0.8"],
             ["tough-cookie", "npm:4.0.0"],
             ["ts-jest", "virtual:c98ce58885144301218484485d1bce379dcb9bca00db8c788bf03744426854e81df27193a1ae94cb395da32081844e42eede6acc8853aa02a5b2717e2ce5aed8#npm:27.1.1"],
             ["ts-node", "virtual:c98ce58885144301218484485d1bce379dcb9bca00db8c788bf03744426854e81df27193a1ae94cb395da32081844e42eede6acc8853aa02a5b2717e2ce5aed8#npm:10.4.0"],
@@ -3552,6 +3553,15 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "linkType": "HARD",
         }]
       ]],
+      ["jssha", [
+        ["npm:3.2.0", {
+          "packageLocation": "./.yarn/cache/jssha-npm-3.2.0-c57f6fc836-2adb8a9a57.zip/node_modules/jssha/",
+          "packageDependencies": [
+            ["jssha", "npm:3.2.0"]
+          ],
+          "linkType": "HARD",
+        }]
+      ]],
       ["kleur", [
         ["npm:3.0.3", {
           "packageLocation": "./.yarn/cache/kleur-npm-3.0.3-f6f53649a4-df82cd1e17.zip/node_modules/kleur/",
@@ -3997,6 +4007,16 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "linkType": "HARD",
         }]
       ]],
+      ["otpauth", [
+        ["npm:7.0.8", {
+          "packageLocation": "./.yarn/cache/otpauth-npm-7.0.8-30fe46c38c-7bd3fa4fc2.zip/node_modules/otpauth/",
+          "packageDependencies": [
+            ["otpauth", "npm:7.0.8"],
+            ["jssha", "npm:3.2.0"]
+          ],
+          "linkType": "HARD",
+        }]
+      ]],
       ["p-limit", [
         ["npm:2.3.0", {
           "packageLocation": "./.yarn/cache/p-limit-npm-2.3.0-94a0310039-84ff17f1a3.zip/node_modules/p-limit/",
@@ -4097,6 +4117,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["jest", "virtual:c98ce58885144301218484485d1bce379dcb9bca00db8c788bf03744426854e81df27193a1ae94cb395da32081844e42eede6acc8853aa02a5b2717e2ce5aed8#npm:27.4.5"],
             ["jest-fetch-mock", "npm:3.0.3"],
             ["jest-runner", "npm:27.4.5"],
+            ["otpauth", "npm:7.0.8"],
             ["tough-cookie", "npm:4.0.0"],
             ["ts-jest", "virtual:c98ce58885144301218484485d1bce379dcb9bca00db8c788bf03744426854e81df27193a1ae94cb395da32081844e42eede6acc8853aa02a5b2717e2ce5aed8#npm:27.1.1"],
             ["ts-node", "virtual:c98ce58885144301218484485d1bce379dcb9bca00db8c788bf03744426854e81df27193a1ae94cb395da32081844e42eede6acc8853aa02a5b2717e2ce5aed8#npm:10.4.0"],
