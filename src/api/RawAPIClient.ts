@@ -10,14 +10,14 @@ import { UUID } from './schema/primitive'
 /**
  * Low level API client for Personal Capital.
  */
-export class APIClient {
+export class RawAPIClient {
   private _cookieJar: CookieJar
   private _fetch: Fetch
-  private _options: APIClient.Options
+  private _options: RawAPIClient.Options
   private _lastCsrf?: UUID
   private _lastServerChangeId = -1
 
-  constructor(cookieJar: CookieJar, fetch?: Fetch, options: Partial<APIClient.Options> = {}) {
+  constructor(cookieJar: CookieJar, fetch?: Fetch, options: Partial<RawAPIClient.Options> = {}) {
     if (!fetch) {
       if (!(typeof global.fetch === 'function')) {
         throw new Error(`Please provide an implementation of the fetch API`)
@@ -27,7 +27,7 @@ export class APIClient {
 
     this._cookieJar = cookieJar
     this._fetch = fetch
-    this._options = { ...APIClient.DEFAULT_OPTIONS, ...options }
+    this._options = { ...RawAPIClient.DEFAULT_OPTIONS, ...options }
   }
 
   async call<TName extends OperationName>(
@@ -124,7 +124,7 @@ export class APIClient {
   }
 }
 
-export namespace APIClient {
+export namespace RawAPIClient {
   export interface Options {
     baseUrl: string
     initialCsrfUrl: string

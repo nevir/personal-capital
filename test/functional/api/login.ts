@@ -1,5 +1,5 @@
 import fetch from 'isomorphic-fetch'
-import { APIClient } from 'personal-capital'
+import { RawAPIClient } from 'personal-capital'
 import { CookieJar, } from 'tough-cookie'
 import { configOrPrompt, prompt } from '../../support/functional/dialog'
 
@@ -24,7 +24,7 @@ describe('APIClient Login Flows', () => {
     })
 
     describe('SMS Flow', () => {
-      const client = new APIClient(new CookieJar(), fetch)
+      const client = new RawAPIClient(new CookieJar(), fetch)
       let deviceName: string
 
       it('identifies the user', async () => {
