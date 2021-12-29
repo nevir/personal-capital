@@ -16,14 +16,15 @@ export type UserStatus =
 
 /** Potential credential types that are supported. */
 export type UserCredential =
-  | 'OOB_PHONE'
   | 'DEVICE'
   | 'OOB_EMAIL'
+  | 'OOB_PHONE'
   | 'OOB_SMS'
+  | 'OOB_TOTP'
+  | 'PASSWORD_RESET'
+  | 'PASSWORD'
   | 'PIN'
   | 'SITE_KNOWLEDGE'
-  | 'PASSWORD'
-  | 'PASSWORD_RESET'
 
 /** Flags indicating which specific functionality is enabled. */
 export type AccountMetaData =
