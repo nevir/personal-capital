@@ -44,6 +44,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["dialog-node", "npm:0.2.1"],
             ["isomorphic-fetch", "npm:3.0.0"],
             ["jest", "virtual:c98ce58885144301218484485d1bce379dcb9bca00db8c788bf03744426854e81df27193a1ae94cb395da32081844e42eede6acc8853aa02a5b2717e2ce5aed8#npm:27.4.5"],
+            ["jest-fetch-mock", "npm:3.0.3"],
             ["jest-runner", "npm:27.4.5"],
             ["tough-cookie", "npm:4.0.0"],
             ["ts-jest", "virtual:c98ce58885144301218484485d1bce379dcb9bca00db8c788bf03744426854e81df27193a1ae94cb395da32081844e42eede6acc8853aa02a5b2717e2ce5aed8#npm:27.1.1"],
@@ -2007,6 +2008,16 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "linkType": "HARD",
         }]
       ]],
+      ["cross-fetch", [
+        ["npm:3.1.4", {
+          "packageLocation": "./.yarn/cache/cross-fetch-npm-3.1.4-45e4517cba-2107e5e633.zip/node_modules/cross-fetch/",
+          "packageDependencies": [
+            ["cross-fetch", "npm:3.1.4"],
+            ["node-fetch", "npm:2.6.1"]
+          ],
+          "linkType": "HARD",
+        }]
+      ]],
       ["cross-spawn", [
         ["npm:7.0.3", {
           "packageLocation": "./.yarn/cache/cross-spawn-npm-7.0.3-e4ff3e65b3-671cc7c728.zip/node_modules/cross-spawn/",
@@ -3101,6 +3112,17 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "linkType": "HARD",
         }]
       ]],
+      ["jest-fetch-mock", [
+        ["npm:3.0.3", {
+          "packageLocation": "./.yarn/cache/jest-fetch-mock-npm-3.0.3-ac072ca8af-fb052f7e0e.zip/node_modules/jest-fetch-mock/",
+          "packageDependencies": [
+            ["jest-fetch-mock", "npm:3.0.3"],
+            ["cross-fetch", "npm:3.1.4"],
+            ["promise-polyfill", "npm:8.2.1"]
+          ],
+          "linkType": "HARD",
+        }]
+      ]],
       ["jest-get-type", [
         ["npm:27.4.0", {
           "packageLocation": "./.yarn/cache/jest-get-type-npm-27.4.0-72f58c1f46-bb9b70e420.zip/node_modules/jest-get-type/",
@@ -3836,6 +3858,13 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
         }]
       ]],
       ["node-fetch", [
+        ["npm:2.6.1", {
+          "packageLocation": "./.yarn/cache/node-fetch-npm-2.6.1-46c670dbc1-91075bedd5.zip/node_modules/node-fetch/",
+          "packageDependencies": [
+            ["node-fetch", "npm:2.6.1"]
+          ],
+          "linkType": "HARD",
+        }],
         ["npm:2.6.6", {
           "packageLocation": "./.yarn/cache/node-fetch-npm-2.6.6-056db6b778-ee8290626b.zip/node_modules/node-fetch/",
           "packageDependencies": [
@@ -4066,6 +4095,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["dialog-node", "npm:0.2.1"],
             ["isomorphic-fetch", "npm:3.0.0"],
             ["jest", "virtual:c98ce58885144301218484485d1bce379dcb9bca00db8c788bf03744426854e81df27193a1ae94cb395da32081844e42eede6acc8853aa02a5b2717e2ce5aed8#npm:27.4.5"],
+            ["jest-fetch-mock", "npm:3.0.3"],
             ["jest-runner", "npm:27.4.5"],
             ["tough-cookie", "npm:4.0.0"],
             ["ts-jest", "virtual:c98ce58885144301218484485d1bce379dcb9bca00db8c788bf03744426854e81df27193a1ae94cb395da32081844e42eede6acc8853aa02a5b2717e2ce5aed8#npm:27.1.1"],
@@ -4152,6 +4182,15 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packagePeers": [
             "@types/bluebird",
             "bluebird"
+          ],
+          "linkType": "HARD",
+        }]
+      ]],
+      ["promise-polyfill", [
+        ["npm:8.2.1", {
+          "packageLocation": "./.yarn/cache/promise-polyfill-npm-8.2.1-1434f11a9b-bd2601d28c.zip/node_modules/promise-polyfill/",
+          "packageDependencies": [
+            ["promise-polyfill", "npm:8.2.1"]
           ],
           "linkType": "HARD",
         }]

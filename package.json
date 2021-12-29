@@ -23,6 +23,7 @@
     "dialog-node": "^0.2.1",
     "isomorphic-fetch": "^3.0.0",
     "jest": "^27.4.5",
+    "jest-fetch-mock": "^3.0.3",
     "jest-runner": "^27.4.5",
     "tough-cookie": "^4.0.0",
     "ts-jest": "^27.1.1",
