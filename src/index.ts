@@ -1,3 +1,7 @@
 export * from './api/APIClient'
+export * from './api/APIError'
 export * from './api/RawAPIClient'
+export * from './api/schema/enums'
+export * from './api/schema/operations'
+export * from './api/schema/primitive'
 export * from './version'
