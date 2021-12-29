@@ -6,11 +6,12 @@ import { Operation, OperationName } from './schema/operations'
 import { ClientType } from './schema/enums'
 import { BaseRequest } from './schema/format'
 import { UUID } from './schema/primitive'
+import { APIClient } from './APIClient'
 
 /**
  * Low level API client for Personal Capital.
  */
-export class RawAPIClient {
+export class RawAPIClient implements APIClient {
   private _cookieJar: CookieJar
   private _fetch: Fetch
   private _options: RawAPIClient.Options
@@ -32,8 +33,8 @@ export class RawAPIClient {
 
   async call<TName extends OperationName>(
     operation: TName,
-    request: Operation<TName>['Request']
-  ): Promise<Operation<TName>['Response']> {
+    request: Operation[TName]['Request']
+  ): Promise<Operation[TName]['Response']> {
     const url = `${this._options.baseUrl}${operation}`
     const commonFields: BaseRequest = {
       apiClient: this._options.clientType,
@@ -53,7 +54,7 @@ export class RawAPIClient {
       body: params,
     })
 
-    const data = await response.json() as Operation<TName>['Response']
+    const data = await response.json() as Operation[TName]['Response']
 
     if (data?.spHeader?.csrf) {
       this._lastCsrf = data.spHeader.csrf

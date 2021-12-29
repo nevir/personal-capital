@@ -15,4 +15,6 @@ export type Operations =
 
 export type OperationName = Operations['path']
 
-export type Operation<TName extends OperationName> = Extract<Operations, { path: TName }>
+export type Operation = {
+  [TName in OperationName]: Extract<Operations, { path: TName }>
+}
