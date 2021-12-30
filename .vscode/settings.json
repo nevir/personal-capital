@@ -28,7 +28,6 @@
   "typescript.suggest.jsdoc.generateReturns": false,
 
   "jest.jestCommandLine": "yarn jest",
-  "jest.showCoverageOnLoad": true,
   "jest.autoRun": {
     "watch": true,
     "onStartup": ["all-tests"]
