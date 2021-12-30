@@ -5,6 +5,10 @@ import * as otpauth from 'otpauth'
 
 import { configOrPrompt } from '../../support/functional/dialog'
 
+// Ideally, we'd do this via jest.config.js, buuuut…
+// https://github.com/facebook/jest/issues/9759
+jest.setTimeout(2 ** 31 - 1)
+
 describe('PersonalCapital Login Flows', () => {
 
   describe('TOTP Flow', () => {
