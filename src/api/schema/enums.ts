@@ -5,6 +5,7 @@ export type ClientType =
 /** The session's current state in the authorization workflow. */
 export type AuthenticationLevel =
   | 'DEVICE_AUTHORIZED'
+  | 'MFA_REQUIRED'
   | 'NONE'
   | 'SESSION_AUTHENTICATED'
   | 'USER_IDENTIFIED'
@@ -13,6 +14,10 @@ export type AuthenticationLevel =
 /** A user's high level status. */
 export type UserStatus =
   | 'ACTIVE'
+  | 'INACTIVE'
+  | 'LOCKED'
+  | 'PARTIAL_ENROLLMENT'
+  | 'REQUIRES_VERIFICATION'
 
 /** Potential credential types that are supported. */
 export type UserCredential =

@@ -36,11 +36,13 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageLocation": "./",
           "packageDependencies": [
             ["@tsconfig/node16", "npm:1.0.2"],
+            ["@types/debug", "npm:4.1.7"],
             ["@types/isomorphic-fetch", "npm:0.0.35"],
             ["@types/jest", "npm:27.0.3"],
             ["@types/node", "npm:16.11.13"],
             ["@types/tough-cookie", "npm:4.0.1"],
             ["@types/web", "npm:0.0.48"],
+            ["debug", "virtual:b63257bb08c142aa2a1018ac35127324c27253023a1df2561c1ac43c2273da42c8d1a26252591f8b0e00c4a4bb9321487199fbf3611e5f9159a143e6e82950e0#npm:4.3.3"],
             ["dialog-node", "npm:0.2.1"],
             ["isomorphic-fetch", "npm:3.0.0"],
             ["jest", "virtual:c98ce58885144301218484485d1bce379dcb9bca00db8c788bf03744426854e81df27193a1ae94cb395da32081844e42eede6acc8853aa02a5b2717e2ce5aed8#npm:27.4.5"],
@@ -1215,6 +1217,16 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "linkType": "HARD",
         }]
       ]],
+      ["@types/debug", [
+        ["npm:4.1.7", {
+          "packageLocation": "./.yarn/cache/@types-debug-npm-4.1.7-f54c81f8db-0a7b89d8ed.zip/node_modules/@types/debug/",
+          "packageDependencies": [
+            ["@types/debug", "npm:4.1.7"],
+            ["@types/ms", "npm:0.7.31"]
+          ],
+          "linkType": "HARD",
+        }]
+      ]],
       ["@types/graceful-fs", [
         ["npm:4.1.5", {
           "packageLocation": "./.yarn/cache/@types-graceful-fs-npm-4.1.5-91d62e1050-d076bb61f4.zip/node_modules/@types/graceful-fs/",
@@ -1270,6 +1282,15 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@types/jest", "npm:27.0.3"],
             ["jest-diff", "npm:27.4.2"],
             ["pretty-format", "npm:27.4.2"]
+          ],
+          "linkType": "HARD",
+        }]
+      ]],
+      ["@types/ms", [
+        ["npm:0.7.31", {
+          "packageLocation": "./.yarn/cache/@types-ms-npm-0.7.31-ea3b89342b-daadd354ae.zip/node_modules/@types/ms/",
+          "packageDependencies": [
+            ["@types/ms", "npm:0.7.31"]
           ],
           "linkType": "HARD",
         }]
@@ -4107,11 +4128,13 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageDependencies": [
             ["personal-capital", "workspace:."],
             ["@tsconfig/node16", "npm:1.0.2"],
+            ["@types/debug", "npm:4.1.7"],
             ["@types/isomorphic-fetch", "npm:0.0.35"],
             ["@types/jest", "npm:27.0.3"],
             ["@types/node", "npm:16.11.13"],
             ["@types/tough-cookie", "npm:4.0.1"],
             ["@types/web", "npm:0.0.48"],
+            ["debug", "virtual:b63257bb08c142aa2a1018ac35127324c27253023a1df2561c1ac43c2273da42c8d1a26252591f8b0e00c4a4bb9321487199fbf3611e5f9159a143e6e82950e0#npm:4.3.3"],
             ["dialog-node", "npm:0.2.1"],
             ["isomorphic-fetch", "npm:3.0.0"],
             ["jest", "virtual:c98ce58885144301218484485d1bce379dcb9bca00db8c788bf03744426854e81df27193a1ae94cb395da32081844e42eede6acc8853aa02a5b2717e2ce5aed8#npm:27.4.5"],

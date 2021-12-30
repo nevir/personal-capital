@@ -1,3 +1,5 @@
+import debug from 'debug'
+
 import { VERSION } from '../version'
 import { APIError } from './APIError'
 import { CookieJar } from './dependencies/cookieJar'
@@ -7,6 +9,9 @@ import { ClientType } from './schema/enums'
 import { BaseRequest } from './schema/format'
 import { UUID } from './schema/primitive'
 import { APIClient } from './APIClient'
+
+const log = debug('personal-capital:RawAPIClient')
+let callCount = 0
 
 /**
  * Low level API client for Personal Capital.
@@ -42,19 +47,24 @@ export class RawAPIClient implements APIClient {
       lastServerChangeId: this._lastServerChangeId,
     }
 
-    const params = Object.entries({ ...request, ...commonFields })
+    const params = { ...request, ...commonFields }
+    const body = Object.entries(params)
       .map(([key, value]) => `${encodeURIComponent(key)}=${encodeURIComponent(`${value}`)}`)
       .join('&')
+
+    const callId = callCount++
+    log('[%d]    call: %s %o', callId, url, params)
 
     const response = await this.fetch(url, {
       headers: {
         'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
       },
       method: 'POST',
-      body: params,
+      body,
     })
 
     const data = await response.json() as Operation[TName]['Response']
+    log('[%d] response: %O', callId, data)
 
     if (data?.spHeader?.csrf) {
       this._lastCsrf = data.spHeader.csrf

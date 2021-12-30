@@ -1,12 +1,12 @@
 import fetch from 'isomorphic-fetch'
 import { RawAPIClient } from 'personal-capital'
 import { CookieJar, } from 'tough-cookie'
+
 import { configOrPrompt, prompt } from '../../support/functional/dialog'
 
 // Ideally, we'd do this via jest.config.js, buuuut…
 // https://github.com/facebook/jest/issues/9759
 jest.setTimeout(2 ** 31 - 1)
-
 
 describe('RawAPIClient Login Flows', () => {
   // Skip in VS Code
