@@ -51,6 +51,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["otpauth", "npm:7.0.8"],
             ["tough-cookie", "npm:4.0.0"],
             ["ts-jest", "virtual:c98ce58885144301218484485d1bce379dcb9bca00db8c788bf03744426854e81df27193a1ae94cb395da32081844e42eede6acc8853aa02a5b2717e2ce5aed8#npm:27.1.1"],
+            ["ts-mixer", "npm:6.0.0"],
             ["ts-node", "virtual:c98ce58885144301218484485d1bce379dcb9bca00db8c788bf03744426854e81df27193a1ae94cb395da32081844e42eede6acc8853aa02a5b2717e2ce5aed8#npm:10.4.0"],
             ["typescript", "patch:typescript@npm%3A4.5.4#~builtin<compat/typescript>::version=4.5.4&hash=493e53"]
           ],
@@ -4143,6 +4144,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["otpauth", "npm:7.0.8"],
             ["tough-cookie", "npm:4.0.0"],
             ["ts-jest", "virtual:c98ce58885144301218484485d1bce379dcb9bca00db8c788bf03744426854e81df27193a1ae94cb395da32081844e42eede6acc8853aa02a5b2717e2ce5aed8#npm:27.1.1"],
+            ["ts-mixer", "npm:6.0.0"],
             ["ts-node", "virtual:c98ce58885144301218484485d1bce379dcb9bca00db8c788bf03744426854e81df27193a1ae94cb395da32081844e42eede6acc8853aa02a5b2717e2ce5aed8#npm:10.4.0"],
             ["typescript", "patch:typescript@npm%3A4.5.4#~builtin<compat/typescript>::version=4.5.4&hash=493e53"]
           ],
@@ -4822,6 +4824,15 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             "esbuild",
             "jest",
             "typescript"
+          ],
+          "linkType": "HARD",
+        }]
+      ]],
+      ["ts-mixer", [
+        ["npm:6.0.0", {
+          "packageLocation": "./.yarn/cache/ts-mixer-npm-6.0.0-2312141fdd-791a513c9c.zip/node_modules/ts-mixer/",
+          "packageDependencies": [
+            ["ts-mixer", "npm:6.0.0"]
           ],
           "linkType": "HARD",
         }]

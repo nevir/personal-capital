@@ -47,6 +47,7 @@
     }
   },
   "dependencies": {
-    "debug": "^4.3.3"
+    "debug": "^4.3.3",
+    "ts-mixer": "^6.0.0"
   }
 }
