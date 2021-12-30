@@ -12,9 +12,9 @@ jest.setTimeout(2 ** 31 - 1)
 describe('PersonalCapital Login Flows', () => {
 
   describe('TOTP Flow', () => {
-    const client = new PersonalCapital(new CookieJar(), fetch)
 
     it('can log in', async () => {
+      const client = new PersonalCapital(new CookieJar(), fetch)
       const username = await configOrPrompt('username', 'Email Address')
       const password = await configOrPrompt('password', 'Password')
       const totpUrl = await configOrPrompt('totpUrl', 'TOTP URL')
@@ -30,6 +30,7 @@ describe('PersonalCapital Login Flows', () => {
       const session = await client.querySession()
       expect(session.authLevel).toEqual('SESSION_AUTHENTICATED')
     })
+
   })
 
 })
