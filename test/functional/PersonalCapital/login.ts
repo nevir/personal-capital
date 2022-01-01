@@ -3,7 +3,7 @@ import { PersonalCapital, ChallengeType } from 'personal-capital'
 import { CookieJar } from 'tough-cookie'
 import * as otpauth from 'otpauth'
 
-import { configOrPrompt } from '../../support/functional/dialog'
+import { configOrPrompt } from '../../../support/dialog'
 
 // Ideally, we'd do this via jest.config.js, buuuut…
 // https://github.com/facebook/jest/issues/9759
