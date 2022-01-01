@@ -3,17 +3,16 @@ import { APIClient } from './api/APIClient'
 import { RawAPIClient } from './api/RawAPIClient'
 import { CookieJar } from './api/dependencies/cookieJar'
 import { Fetch } from './api/dependencies/fetch'
-import { PersonalCapitalAuth } from './categories/auth'
-import { Operation } from './api/schema/operations'
-import { CategoryBase } from './categories/CategoryBase'
+import { Auth } from './categories/Auth'
+import { API } from './categories/API'
 
-export * from './categories/auth'
+export * from './categories/Auth'
 
 /**
  * Client for the Personal Capital API.
  */
-export class PersonalCapital extends Mixin(CategoryBase, PersonalCapitalAuth) {
-  private _api: APIClient
+export class PersonalCapital extends Mixin(API, Auth) {
+  protected raw: APIClient
 
   constructor(cookieJar: CookieJar, fetch?: Fetch, options?: Partial<RawAPIClient.Options>)
   constructor(api: APIClient)
@@ -21,21 +20,14 @@ export class PersonalCapital extends Mixin(CategoryBase, PersonalCapitalAuth) {
     super()
 
     if (isCookieJar(cookieJarOrApi)) {
-      this._api = new RawAPIClient(cookieJarOrApi, fetch, options)
+      this.raw = new RawAPIClient(cookieJarOrApi, fetch, options)
     } else {
-      this._api = cookieJarOrApi
+      this.raw = cookieJarOrApi
     }
   }
 
-  async call<TName extends keyof Operation>(
-    operation: TName,
-    request: Operation[TName]['Request']
-  ): Promise<Operation[TName]['Response']['spData']> {
-    return (await this._api.call(operation, request)).spData
-  }
-
   async querySession() {
-    const { spHeader } = await this._api.call('login/querySession', {})
+    const { spHeader } = await this.raw.call('login/querySession', {})
     return spHeader
   }
 }

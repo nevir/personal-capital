@@ -1,4 +1,4 @@
-import { CategoryBase } from './CategoryBase'
+import { API } from './API'
 
 export enum ChallengeType {
   EMAIL = 'OOB_EMAIL',
@@ -37,7 +37,7 @@ export interface Login {
 /**
  * Client for the Personal Capital API.
  */
-export abstract class PersonalCapitalAuth extends CategoryBase {
+export abstract class Auth extends API {
   async login({ username, password, kind, code, deviceName }: Login): Promise<void> {
     await this.identifyUser(username)
     // TODO: Verify the challenge method is allowed via credentials
