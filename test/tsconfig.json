@@ -1,11 +1,10 @@
 {
   "extends": "../tsconfig.base",
   "references": [
-    {
-      "path": "../src"
-    }
+    { "path": "../src" }
   ],
   "compilerOptions": {
+    "composite": true,
     "paths": {
       "personal-capital": ["../src"]
     }
