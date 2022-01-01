@@ -5,13 +5,15 @@ import { CookieJar } from 'tough-cookie'
 import * as otpauth from 'otpauth'
 
 import { configOrPrompt } from '../support/dialog'
+import { FileCookieStore } from 'tough-cookie-file-store'
 
 declare global {
   var client: PersonalCapital
 }
 
 async function main() {
-  const client = new PersonalCapital(new CookieJar(), fetch)
+  const cookies = new CookieJar(new FileCookieStore('./.cookies.local.json'))
+  const client = new PersonalCapital(cookies, fetch)
   const username = await configOrPrompt('username', 'Email Address')
   const password = await configOrPrompt('password', 'Password')
   const totpUrl = await configOrPrompt('totpUrl', 'TOTP URL')

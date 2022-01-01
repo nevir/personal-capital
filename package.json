@@ -22,6 +22,7 @@
     "@types/jest": "^27.0.3",
     "@types/node": "^16.11.13",
     "@types/tough-cookie": "^4",
+    "@types/tough-cookie-file-store": "^2",
     "@types/web": "^0.0.48",
     "dialog-node": "^0.2.1",
     "isomorphic-fetch": "^3.0.0",
@@ -30,6 +31,7 @@
     "jest-runner": "^27.4.5",
     "otpauth": "^7.0.8",
     "tough-cookie": "^4.0.0",
+    "tough-cookie-file-store": "^2.0.3",
     "ts-jest": "^27.1.1",
     "ts-node": "^10.4.0",
     "typescript": "^4.5.4"
