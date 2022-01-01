@@ -98,6 +98,7 @@ export class RawAPIClient implements APIClient {
     const body = await response.text()
     const token = pattern.exec(body)?.[1]
     if (typeof token !== 'string') {
+      log('CSRF token not found in body:', body)
       throw new Error(`Unable to locate CSRF token via ${pattern} on ${url}`)
     }
 
@@ -142,7 +143,7 @@ export namespace RawAPIClient {
   export const DEFAULT_OPTIONS: Options = {
     baseUrl: 'https://home.personalcapital.com/api/',
     initialCsrfUrl: 'https://home.personalcapital.com/page/login/goHome',
-    initialCsrfPattern: /window\.csrf\s*=\s*'([^']+)'/,
+    initialCsrfPattern: /\bcsrf\s*=\s*'([^']+)'/,
     userAgent: `personal-capital/${VERSION} (https://github.com/nevir/personal-capital)`,
     clientType: 'WEB'
   }

@@ -49,7 +49,6 @@ describe('RawAPIClient', () => {
       client = new RawAPIClient(new CookieJar(), undefined, {
         baseUrl: 'https://pc.fake/api/',
         initialCsrfUrl: 'https://pc.fake/csrf',
-        initialCsrfPattern: /window\.csrf\s*=\s*'([^']+)'/,
       })
       fetch.mockOnceIf('https://pc.fake/csrf', `window.csrf='00000000-dead-beef-0123456789ab'`)
     })
@@ -59,7 +58,7 @@ describe('RawAPIClient', () => {
         fetch.resetMocks()
       })
 
-      it('fetches one', async () => {
+      it('fetches from an unauthenticated page', async () => {
         fetch.mockOnceIf('https://pc.fake/csrf', `
           <html>
             <head>
@@ -70,6 +69,25 @@ describe('RawAPIClient', () => {
                 window.csrf='00000000-dead-beef-0123456789ab'
               </script>
             </body>
+          </html>
+        `)
+        fetch.mockOnceIf('https://pc.fake/api/login/querySession', JSON.stringify({ spHeader: { success: true } }))
+
+        await client.call('login/querySession', {})
+        expect(fetch.mock.calls.length).toBe(2)
+      })
+
+      it('fetches from an authenticated page', async () => {
+        fetch.mockOnceIf('https://pc.fake/csrf', `
+          <html>
+            <head>
+              <title>TOTALLY REALLY A PERSONAL CAPITAL PAGE</title>
+              <script type="text/javascript">
+                var csrf = 'bead5da1-250b-489f-82c0-5b089824bac4',
+                  userGuid = 'foobarbaz';
+              </script>
+            </head>
+            <body>content and stuff</body>
           </html>
         `)
         fetch.mockOnceIf('https://pc.fake/api/login/querySession', JSON.stringify({ spHeader: { success: true } }))
