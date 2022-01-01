@@ -23,8 +23,6 @@ export type Operations =
   | QuerySession
   | SuggestDeviceName
 
-export type OperationName = Operations['path']
-
 export type Operation = {
-  [TName in OperationName]: Extract<Operations, { path: TName }>
+  [TName in Operations['path']]: Extract<Operations, { path: TName }>
 }

@@ -4,7 +4,7 @@ import { VERSION } from '../version'
 import { APIError } from './APIError'
 import { CookieJar } from './dependencies/cookieJar'
 import { Fetch, FetchRequestInit, OkFetchResponse } from './dependencies/fetch'
-import { Operation, OperationName } from './schema/operations'
+import { Operation } from './schema/operations'
 import { ClientType } from './schema/enums'
 import { BaseRequest } from './schema/format'
 import { UUID } from './schema/primitive'
@@ -36,7 +36,7 @@ export class RawAPIClient implements APIClient {
     this._options = { ...RawAPIClient.DEFAULT_OPTIONS, ...options }
   }
 
-  async call<TName extends OperationName>(
+  async call<TName extends keyof Operation>(
     operation: TName,
     request: Operation[TName]['Request']
   ): Promise<Operation[TName]['Response']> {

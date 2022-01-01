@@ -1,4 +1,4 @@
-import { APIClient } from '../api/APIClient'
+import { CategoryBase } from './CategoryBase'
 
 export enum ChallengeType {
   EMAIL = 'OOB_EMAIL',
@@ -37,9 +37,7 @@ export interface Login {
 /**
  * Client for the Personal Capital API.
  */
-export abstract class PersonalCapitalAuth {
-  abstract api: APIClient
-
+export abstract class PersonalCapitalAuth extends CategoryBase {
   async login({ username, password, kind, code, deviceName }: Login): Promise<void> {
     await this.identifyUser(username)
     // TODO: Verify the challenge method is allowed via credentials
@@ -51,7 +49,7 @@ export abstract class PersonalCapitalAuth {
   // Specific API Calls
 
   async identifyUser(username: string) {
-    const response = await this.api.call('login/identifyUser', {
+    const response = await this.call('login/identifyUser', {
       bindDevice: false, // TODO: remove?
       username,
       redirectTo: '',
@@ -60,12 +58,12 @@ export abstract class PersonalCapitalAuth {
       skipLinkAccount: false,
     })
 
-    return response.spData
+    return response
   }
 
   async challenge(kind: ChallengeType) {
     const operation = OPERATION_BY_CHALLENGE_TYPE[kind]
-    await this.api.call(operation, {
+    await this.call(operation, {
       challengeReason: 'DEVICE_AUTH',
       challengeMethod: kind === ChallengeType.TOTP ? 'TP' : 'OP',
       bindDevice: false, // TODO: remove?
@@ -77,14 +75,14 @@ export abstract class PersonalCapitalAuth {
     const base = { challengeReason: 'DEVICE_AUTH', bindDevice: false } as const
 
     if (kind === ChallengeType.TOTP) {
-      await this.api.call(operation, { ...base, challengeMethod: 'TOTP', totpCode: code })
+      await this.call(operation, { ...base, challengeMethod: 'TOTP', totpCode: code })
     } else {
-      await this.api.call(operation, { ...base, challengeMethod: 'OP', code })
+      await this.call(operation, { ...base, challengeMethod: 'OP', code })
     }
   }
 
   async authenticatePassword(username: string, password: string, deviceName?: string) {
-    await this.api.call('credential/authenticatePassword', {
+    await this.call('credential/authenticatePassword', {
       username,
       passwd: password,
       deviceName: deviceName || '',
