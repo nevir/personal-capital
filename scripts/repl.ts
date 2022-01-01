@@ -12,7 +12,7 @@ declare global {
 }
 
 async function main() {
-  const cookies = new CookieJar(new FileCookieStore('./.cookies.local.json'))
+  const cookies = new CookieJar(new FileCookieStore('./.local.cookies.json'))
   const client = new PersonalCapital(cookies, fetch)
   const username = await configOrPrompt('username', 'Email Address')
   const password = await configOrPrompt('password', 'Password')

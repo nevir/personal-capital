@@ -1,6 +1,6 @@
 export let CONFIG: any
 try {
-  CONFIG = require('../.config.local.json')
+  CONFIG = require('../.local.config.json')
 } catch {
   CONFIG = {}
 }

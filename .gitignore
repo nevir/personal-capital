@@ -23,4 +23,4 @@ coverage/
 docs/api/examples/
 
 # Development Configuration
-.config.local.json
+.local.*
