@@ -29,6 +29,7 @@ const AUTHENTICATE_CODE_OPERATION_BY_CHALLENGE_TYPE = {
 export interface Login {
   username: string
   password: string
+  deviceName?: string
   kind: CodeChallengeType
   code: () => Promise<string>
 }
@@ -39,12 +40,12 @@ export interface Login {
 export abstract class PersonalCapitalAuth {
   abstract api: APIClient
 
-  async login({ username, password, kind, code }: Login): Promise<void> {
+  async login({ username, password, kind, code, deviceName }: Login): Promise<void> {
     await this.identifyUser(username)
     // TODO: Verify the challenge method is allowed via credentials
     await this.challenge(kind)
     await this.authenticateCode(kind, await code())
-    await this.authenticatePassword(username, password)
+    await this.authenticatePassword(username, password, deviceName)
   }
 
   // Specific API Calls
