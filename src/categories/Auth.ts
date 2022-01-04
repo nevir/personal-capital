@@ -35,7 +35,7 @@ export interface Login {
 }
 
 /**
- * Client for the Personal Capital API.
+ * Authentication related calls for the Personal Capital API.
  */
 export abstract class Auth extends API {
   async login({ username, password, kind, code, deviceName }: Login): Promise<void> {

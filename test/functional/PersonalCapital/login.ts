@@ -27,8 +27,8 @@ describe('PersonalCapital Login Flows', () => {
         code: async () => otp.generate()
       })
 
-      const session = await client.querySession()
-      expect(session.authLevel).toEqual('SESSION_AUTHENTICATED')
+      const { authenticationLevel } = await client.querySession()
+      expect(authenticationLevel).toEqual('SESSION_AUTHENTICATED')
     })
 
   })

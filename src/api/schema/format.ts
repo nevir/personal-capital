@@ -4,13 +4,13 @@ import { Email, GUID, UUID } from './primitive'
 /**
  * Properties common to all Personal Capital Requests
  */
-export interface Request {
+export interface BaseRequest {
   /** The kind of making the request. */
   apiClient: ClientType
   /** The most recent CSRF token associated with this session. */
   csrf: UUID
   /** The most recent server change id associated with this session. */
-  lastServerChangeId: number
+  lastServerChangeId?: number
 }
 
 /**

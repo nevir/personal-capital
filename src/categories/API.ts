@@ -1,7 +1,6 @@
-import { APIError } from '..'
-import { APIClient } from '../api/APIClient'
+import { APIClient, APIRequest } from '../api/APIClient'
 import { AuthenticationLevel, UserStatus } from '../api/schema/enums'
-import { Header, ServerDataChange } from '../api/schema/format'
+import { FieldError, Header, Response, ServerDataChange } from '../api/schema/format'
 import { Operation } from '../api/schema/operations'
 import { Email, UUID, GUID } from '../api/schema/primitive'
 
@@ -10,7 +9,7 @@ export interface Session {
   authenticationLevel: AuthenticationLevel
 
   /** The last known CSRF token. */
-  csrf?: UUID
+  csrf: UUID
 
   /** The last known server change ID. */
   changeId?: number
@@ -20,7 +19,7 @@ export interface Session {
     /** The user's email address (their username). */
     email: Email
     /** The user's id. */
-    personId: number
+    id: number
     /** The user's guid. */
     guid: GUID
     /** The user's status. */
@@ -56,15 +55,33 @@ export interface Session {
   }
 }
 
+export class APIError extends Error {
+  errors: FieldError[]
+
+  constructor(message: string, public header?: Header) {
+    super(`${message}: ${JSON.stringify(header?.errors)}`)
+
+    this.errors = header?.errors || []
+
+    // https://github.com/Microsoft/TypeScript-wiki/blob/main/Breaking-Changes.md#extending-built-ins-like-error-array-and-map-may-no-longer-work
+    Object.setPrototypeOf(this, APIError.prototype)
+  }
+}
+
 export abstract class API {
-  protected abstract raw: APIClient
+  abstract api: APIClient
+
+  private _session?: Session
 
   /**
    * Metadata describing the current session.
-   *
-   * Guaranteed to exist after the first request made via call().
    */
-  session?: Session
+  get session(): Session {
+    if (!this._session) {
+      throw new Error('session cannot be accessed prior to invoking call()')
+    }
+    return this._session
+  }
 
   /**
    * Calls an operation on the Personal Capital API.
@@ -76,28 +93,39 @@ export abstract class API {
     operation: TName,
     request: Operation[TName]['Request']
   ): Promise<Operation[TName]['Response']['spData']> {
-    const { spData, spHeader } = await this.raw.call(operation, request)
-    this.session = extractSession(spHeader, this.session)
+    if (!this._session) {
+      this._session = {
+        authenticationLevel: 'NONE',
+        csrf: await this.api.getInitialCsrfToken(),
+      }
+    }
+
+    const base: APIRequest = {
+      csrf: this._session.csrf,
+      lastServerChangeId: this._session.changeId || -1,
+    }
+    const { spHeader, spData } = await this.api.call(operation, { ...request, ...base }) as Response<Header>
+    this._session = extractSession(spHeader, this.session)
 
     if (!spHeader.success) {
       throw new APIError(operation, spHeader)
     }
 
-    return spData
+    return spData as any
   }
 }
 
-function extractSession(spHeader: Header, previous?: Session) {
+function extractSession(spHeader: Header, previous: Session) {
   const newSession: Session = {
     authenticationLevel: spHeader.authLevel,
-    csrf: spHeader.csrf || previous?.csrf,
-    changeId: findHighestChangeId(spHeader.SP_DATA_CHANGES, previous?.changeId),
+    csrf: spHeader.csrf || previous.csrf,
+    changeId: findHighestChangeId(spHeader.SP_DATA_CHANGES, previous.changeId),
   }
 
   if ('userGuid' in spHeader) {
     newSession.user = {
       email: spHeader.username,
-      personId: spHeader.personId,
+      id: spHeader.personId,
       guid: spHeader.userGuid,
       status: spHeader.status,
       isDelegate: spHeader.isDelegate,

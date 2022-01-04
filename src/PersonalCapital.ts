@@ -5,14 +5,15 @@ import { CookieJar } from './api/dependencies/cookieJar'
 import { Fetch } from './api/dependencies/fetch'
 import { Auth } from './categories/Auth'
 import { API } from './categories/API'
+import { Session } from './categories/Session'
 
 export * from './categories/Auth'
 
 /**
  * Client for the Personal Capital API.
  */
-export class PersonalCapital extends Mixin(API, Auth) {
-  protected raw: APIClient
+export class PersonalCapital extends Mixin(API, Auth, Session) {
+  api: APIClient
 
   constructor(cookieJar: CookieJar, fetch?: Fetch, options?: Partial<RawAPIClient.Options>)
   constructor(api: APIClient)
@@ -20,15 +21,10 @@ export class PersonalCapital extends Mixin(API, Auth) {
     super()
 
     if (isCookieJar(cookieJarOrApi)) {
-      this.raw = new RawAPIClient(cookieJarOrApi, fetch, options)
+      this.api = new RawAPIClient(cookieJarOrApi, fetch, options)
     } else {
-      this.raw = cookieJarOrApi
+      this.api = cookieJarOrApi
     }
-  }
-
-  async querySession() {
-    const { spHeader } = await this.raw.call('login/querySession', {})
-    return spHeader
   }
 }
 

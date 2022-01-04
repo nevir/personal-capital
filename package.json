@@ -12,6 +12,7 @@
     "build": "tsc --build ./src",
     "clean": "rm -rf {src,test}{/**,}/*.{js,d.ts,tsbuildinfo}",
     "repl": "ts-node --project ./scripts/tsconfig.json --require ./scripts/repl",
+    "test": "jest",
     "test-functional": "jest test/functional",
     "test-unit": "jest test/unit"
   },

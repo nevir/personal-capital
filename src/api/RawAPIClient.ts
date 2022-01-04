@@ -1,14 +1,10 @@
 import debug from 'debug'
 
 import { VERSION } from '../version'
-import { APIError } from './APIError'
 import { CookieJar } from './dependencies/cookieJar'
 import { Fetch, FetchRequestInit, OkFetchResponse } from './dependencies/fetch'
-import { Operation } from './schema/operations'
 import { ClientType } from './schema/enums'
-import { Request } from './schema/format'
-import { UUID } from './schema/primitive'
-import { APIClient } from './APIClient'
+import { APIClient, APIRequest } from './APIClient'
 
 const log = debug('personal-capital:RawAPIClient')
 let callCount = 0
@@ -20,8 +16,6 @@ export class RawAPIClient implements APIClient {
   private _cookieJar: CookieJar
   private _fetch: Fetch
   private _options: RawAPIClient.Options
-  private _lastCsrf?: UUID
-  private _lastServerChangeId = -1
 
   constructor(cookieJar: CookieJar, fetch?: Fetch, options: Partial<RawAPIClient.Options> = {}) {
     if (!fetch) {
@@ -36,18 +30,12 @@ export class RawAPIClient implements APIClient {
     this._options = { ...RawAPIClient.DEFAULT_OPTIONS, ...options }
   }
 
-  async call<TName extends keyof Operation>(
-    operation: TName,
-    request: Operation[TName]['Request']
-  ): Promise<Operation[TName]['Response']> {
+  async call(
+    operation: string,
+    request: APIRequest
+  ): Promise<unknown> {
     const url = `${this._options.baseUrl}${operation}`
-    const commonFields: Request = {
-      apiClient: this._options.clientType,
-      csrf: await this.getCurrentCsrf(),
-      lastServerChangeId: this._lastServerChangeId,
-    }
-
-    const params = { ...request, ...commonFields }
+    const params = { ...request, apiClient: this._options.clientType }
     const body = Object.entries(params)
       .map(([key, value]) => `${encodeURIComponent(key)}=${encodeURIComponent(`${value}`)}`)
       .join('&')
@@ -63,35 +51,13 @@ export class RawAPIClient implements APIClient {
       body,
     })
 
-    const data = await response.json() as Operation[TName]['Response']
+    const data = await response.json()
     log('[%d] response: %O', callId, data)
-
-    if (data?.spHeader?.csrf) {
-      this._lastCsrf = data.spHeader.csrf
-    }
-
-    for (const { serverChangeId } of data?.spHeader?.SP_DATA_CHANGES || []) {
-      if (serverChangeId > this._lastServerChangeId) {
-        this._lastServerChangeId = serverChangeId
-      }
-    }
-
-    if (!data?.spHeader?.success) {
-      throw new APIError(operation, data?.spHeader)
-    }
 
     return data
   }
 
-  private async getCurrentCsrf() {
-    if (!this._lastCsrf) {
-      this._lastCsrf = await this.getInitialCsrf()
-    }
-
-    return this._lastCsrf
-  }
-
-  private async getInitialCsrf() {
+  async getInitialCsrfToken() {
     const { initialCsrfUrl: url, initialCsrfPattern: pattern } = this._options
 
     const response = await this.fetch(url)
