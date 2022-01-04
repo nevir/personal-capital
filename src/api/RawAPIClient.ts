@@ -6,7 +6,7 @@ import { CookieJar } from './dependencies/cookieJar'
 import { Fetch, FetchRequestInit, OkFetchResponse } from './dependencies/fetch'
 import { Operation } from './schema/operations'
 import { ClientType } from './schema/enums'
-import { BaseRequest } from './schema/format'
+import { Request } from './schema/format'
 import { UUID } from './schema/primitive'
 import { APIClient } from './APIClient'
 
@@ -41,7 +41,7 @@ export class RawAPIClient implements APIClient {
     request: Operation[TName]['Request']
   ): Promise<Operation[TName]['Response']> {
     const url = `${this._options.baseUrl}${operation}`
-    const commonFields: BaseRequest = {
+    const commonFields: Request = {
       apiClient: this._options.clientType,
       csrf: await this.getCurrentCsrf(),
       lastServerChangeId: this._lastServerChangeId,
@@ -77,7 +77,7 @@ export class RawAPIClient implements APIClient {
     }
 
     if (!data?.spHeader?.success) {
-      throw new APIError(operation, data)
+      throw new APIError(operation, data?.spHeader)
     }
 
     return data

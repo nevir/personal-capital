@@ -4,7 +4,7 @@ import { Email, GUID, UUID } from './primitive'
 /**
  * Properties common to all Personal Capital Requests
  */
-export interface BaseRequest {
+export interface Request {
   /** The kind of making the request. */
   apiClient: ClientType
   /** The most recent CSRF token associated with this session. */
@@ -24,7 +24,7 @@ export interface Response<THeader extends BaseHeader = BaseHeader, TData = unkno
 /**
  * Properties common to all header types.
  */
-export interface BaseHeader {
+interface BaseHeader {
   /** The session's current state in the authorization workflow. */
   authLevel: AuthenticationLevel
   /** CSRF token to use in the following request. */
@@ -39,16 +39,12 @@ export interface BaseHeader {
   status: UserStatus
   /** ??? */
   success: boolean
-  /** The current user's guid. */
-  userGuid: GUID
-  /** The user's email address. */
-  username: Email
 }
 
 /**
  * Properties common to remembered and signed in users.
  */
-export interface BaseHeaderWithUser extends BaseHeader {
+interface BaseHeaderWithUser extends BaseHeader {
   /** Flags indicating which specific functionality is enabled. */
   accountsMetaData: AccountMetaData[]
   /** Whether the current user is a beta tester. */
@@ -63,8 +59,19 @@ export interface BaseHeaderWithUser extends BaseHeader {
   personId: number
   /** ??? */
   qualifiedLead: boolean
+  /** The current user's guid. */
+  userGuid: GUID
+  /** The user's email address. */
+  username: Email
   /** ??? */
   userStage: 'F'
+}
+
+/**
+ * Session-level metadata returned for an unauthenticated session.
+ */
+export interface UnauthenticatedHeader extends BaseHeader {
+  authLevel: 'NONE'
 }
 
 /**
@@ -89,6 +96,19 @@ export interface AuthorizedHeader extends BaseHeaderWithUser {
     hasOnUs: boolean
   }
 }
+
+/**
+ * Session-level metadata returned for a fully authenticated session.
+ */
+export interface AuthenticatedHeader extends BaseHeaderWithUser {
+  authLevel: 'SESSION_AUTHENTICATED'
+}
+
+export type Header =
+  | AuthenticatedHeader
+  | AuthorizedHeader
+  | UnauthenticatedHeader
+  | UserIdentifiedHeader
 
 /**
  * A server data change.

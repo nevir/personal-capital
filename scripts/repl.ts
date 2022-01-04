@@ -13,18 +13,22 @@ declare global {
 
 async function main() {
   const cookies = new CookieJar(new FileCookieStore('./.local.cookies.json'))
+  console.log('cookies:', cookies.getCookies('https://home.personalcapital.com/'))
   const client = new PersonalCapital(cookies, fetch)
   const username = await configOrPrompt('username', 'Email Address')
   const password = await configOrPrompt('password', 'Password')
   const totpUrl = await configOrPrompt('totpUrl', 'TOTP URL')
   const otp = otpauth.URI.parse(totpUrl)
 
-  const result = await client.login({
-    username,
-    password,
-    kind: ChallengeType.TOTP,
-    code: async () => otp.generate()
-  })
+  await client.identifyUser(username)
+
+  // await client.login({
+  //   username,
+  //   password,
+  //   deviceName: `Personal Capital REPL`,
+  //   kind: ChallengeType.TOTP,
+  //   code: async () => otp.generate()
+  // })
 
   global.client = client
 }
