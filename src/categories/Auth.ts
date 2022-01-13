@@ -1,3 +1,4 @@
+import { AuthenticationLevel } from '../api/schema/enums'
 import { API } from './API'
 
 export enum ChallengeType {
@@ -34,16 +35,28 @@ export interface Login {
   code: () => Promise<string>
 }
 
+const NEEDS_2FA = new Set<AuthenticationLevel>([
+  'USER_IDENTIFIED',
+  'MFA_REQUIRED',
+  'NONE',
+])
+
 /**
  * Authentication related calls for the Personal Capital API.
  */
 export abstract class Auth extends API {
   async login({ username, password, kind, code, deviceName }: Login): Promise<void> {
     await this.identifyUser(username)
-    // TODO: Verify the challenge method is allowed via credentials
-    await this.challenge(kind)
-    await this.authenticateCode(kind, await code())
-    await this.authenticatePassword(username, password, deviceName)
+
+    if (NEEDS_2FA.has(this.session.authenticationLevel)) {
+      // TODO: Verify the challenge method is allowed via credentials
+      await this.challenge(kind)
+      await this.authenticateCode(kind, await code())
+    }
+
+    if (this.session.authenticationLevel !== 'SESSION_AUTHENTICATED') {
+      await this.authenticatePassword(username, password, deviceName)
+    }
   }
 
   // Specific API Calls
