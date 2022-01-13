@@ -40,4 +40,8 @@ export type AccountMetaData =
 
 /** A kind of server data change */
 export type ServerDataChangeType =
-  'PERSON_UPDATED'
+  | 'PERSON_UPDATED'
+
+/** A financial currency. */
+export type Currency =
+  | 'USD'
