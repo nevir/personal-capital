@@ -10,6 +10,7 @@ import { GetUserTransactions } from './transaction/getUserTransactions'
 import { IdentifyUser } from './login/identifyUser'
 import { QuerySession } from './login/querySession'
 import { SuggestDeviceName } from './credential/suggestDeviceName'
+import { GetAccounts2 } from './newaccount/getAccounts2'
 
 export type Operations =
   | AuthenticateEmailByCode
@@ -20,6 +21,7 @@ export type Operations =
   | ChallengePhone
   | ChallengeSms
   | ChallengeTotp
+  | GetAccounts2
   | GetUserTransactions
   | IdentifyUser
   | QuerySession

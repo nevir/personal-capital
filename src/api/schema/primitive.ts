@@ -18,3 +18,18 @@ export type UUID = string
  * A day, encoded as a string in the form YYYY-MM-DD
  */
 export type Day = string
+
+/**
+ * A timestamp since the Unix epoch, in milliseconds.
+ */
+export type Timestamp = number
+
+/**
+ * A URL
+ */
+export type URL = string
+
+/**
+ * A URL Path
+ */
+export type URLPath = string
