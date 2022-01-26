@@ -7,6 +7,7 @@ import { Auth } from './categories/Auth'
 import { API } from './categories/API'
 import { Session } from './categories/Session'
 import { Accounts } from './categories/Accounts'
+import { Transactions } from './categories/Transactions'
 
 export * from './categories/Auth'
 export * from './categories/API'
@@ -14,7 +15,7 @@ export * from './categories/API'
 /**
  * Client for the Personal Capital API.
  */
-export class PersonalCapital extends Mixin(API, Auth, Session, Accounts) {
+export class PersonalCapital extends Mixin(API, Auth, Session, Accounts, Transactions) {
   api: APIClient
 
   constructor(cookieJar: CookieJar, fetch?: Fetch, options?: Partial<RawAPIClient.Options>)

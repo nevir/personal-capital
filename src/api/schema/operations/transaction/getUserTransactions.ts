@@ -114,12 +114,12 @@ export interface GetUserTransactions {
   path: 'transaction/getUserTransactions'
 
   Request: {
-    // JSON array of numbers
-    userAccountIds: string
     startDate: Day
     endDate: Day
+    // JSON array of account ids
+    userAccountIds?: string
     // The UX tab the transactions are being displayed for.
-    tabId: TransactionTabs
+    tabId?: TransactionTabs
   }
 
   Response: Response<AuthenticatedHeader, {
