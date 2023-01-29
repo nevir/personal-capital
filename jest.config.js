@@ -10,6 +10,12 @@ module.exports = {
       setupFiles: [
         '<rootDir>/test/support/unit/setup.ts',
       ],
+    },
+
+    {
+      preset: 'ts-jest',
+      displayName: 'functional',
+      testMatch: ['<rootDir>/test/functional/**/*.ts'],
     }
   ],
 
